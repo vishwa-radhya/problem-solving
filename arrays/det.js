@@ -13,13 +13,15 @@ const categorizedFunctions = {
   ],
   "In-Place Modification": [
     "remove_duplicates_from_sorted_array_in_place_and_return_length",
-    "remove_occurence_of_element_and_return_length"
+    "remove_occurence_of_element_and_return_length",
+    "rotate_array_in_place"
   ],
   "Using Extra Space": [
     "remove_duplicates_from_sorted_array",
     "intersection_of_two_arrays",
     "reverseVowels",
-    "merge_sorted_array"
+    "merge_sorted_array",
+    "rotateArray"
   ],
   "Brute Force": [
     "find_index_of_first_occurence_in_a_string",

@@ -78,3 +78,11 @@ function merge_sorted_array(nums1,m,nums2,n){
     console.log(nums1.sort((a,b)=>a-b))
 }
 // merge_sorted_array([1,2,3,0,0,0],3,[2,5,6],3)
+function rotateArray(nums,k){
+    let l=nums.length
+    let res=[]
+    for(let i=0;i<nums.length;i++){
+        res[(i+k)%l]=nums[i]
+    }
+    return res
+}
