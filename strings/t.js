@@ -63,8 +63,8 @@ function longest_common_prefix(strs){
     }
     return res
 }
-console.log(longest_common_prefix(["flower","flow","flight"]))
-console.log(longest_common_prefix(["dog","racecar","car"]))
+// console.log(longest_common_prefix(["flower","flow","flight"]))
+// console.log(longest_common_prefix(["dog","racecar","car"]))
 
 function reverse_words(s){
     s=s.trim().split(' ').filter(e=>e!=='')
@@ -82,3 +82,9 @@ function reverse_words(s){
 // console.log(reverse_words("the sky is blue"))
 // console.log(reverse_words("  hello world  "))
 // console.log(reverse_words("a good   example"))
+function zigzag_conversion(s,numRows){
+    let mat =[2][3];
+    mat[0][1]=1
+    console.log(mat)
+}
+console.log(zigzag_conversion('PALPALISHIRING',3))
