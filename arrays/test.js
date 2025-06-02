@@ -232,3 +232,83 @@ function num_of_zero_filled_sub_arrays(nums){
 // console.log(num_of_zero_filled_sub_arrays([1,3,0,0,2,0,0,4]))
 // console.log(num_of_zero_filled_sub_arrays([0,0,0,2,0,0]))
 // console.log(num_of_zero_filled_sub_arrays([2,10,2019]))
+function increasing_triplet_subsequence(nums){
+    // for(let i=0;i<=nums.length-3;i++){        
+    //     for(let j=i+1;j<=nums.length-2;j++){
+    //         for(let k=j+1;k<=nums.length-1;k++){
+    //             if((i<j<k) && ((nums[i]<nums[j])&&(nums[j]<nums[k]))){
+    //                 return true
+    //             }
+    //         }
+    //     }
+    // }
+    // return false
+    // worst case O(n^3) ...
+    let first=Number.MAX_VALUE;
+    let second=Number.MAX_VALUE;
+    for(let i=0;i<nums.length;i++){
+        if(nums[i]<=first){
+            first=nums[i]
+        }else if(nums[i]<=second){
+            second=nums[i]
+        }else{
+            return true
+        }
+    }
+    return false
+    //beats 100% first O(n) complexity
+    // another approch which takes 7ms but works fine
+    // let cache = [nums[0], null]
+    // for(let num of nums){
+    //     if(cache[1] !== null && num > cache[1]){
+    //         return true
+    //     } else if(num > cache[0]){
+    //         cache[1] = cache[1] === null ? num : Math.min(num, cache[1]);
+    //     } else {
+    //         cache[0] = Math.min(num, cache[0])
+    //     }
+    // }
+    // return false
+}
+// console.log(increasing_triplet_subsequence([1,2,3,4,5]))
+// console.log(increasing_triplet_subsequence([5,4,3,2,1]))
+// console.log(increasing_triplet_subsequence([2,1,5,0,4,6]))
+// console.log(increasing_triplet_subsequence([1,5,0,4,1,3]))
+
+function best_time_to_buy_and_sell_stocks_2(prices){
+   // simple approach is cash every opportunity where the profit can be made
+//    let profit=0
+//    for(let i=1;i<prices.length;i++){
+//     if(prices[i]>prices[i-1]){
+//         profit+=prices[i]-prices[i-1]
+//     }
+//    }
+//    return profit
+   //beats 100%
+   // even it is not easy to figure out i actually thought something similar to peaks and valleys appraoch but cant implement it good so here is the actual one
+   // find local min and local max sub them and add to total do for next iteration
+   // like a graph of peaks and valleys
+   let peak=prices[0]
+   let valley = prices[0]
+   let maxProfit=0
+   let i=0
+   let len =prices.length
+   while(i<len-1){
+    //finding local min (valley)
+    while(i<len-1 && prices[i]>=prices[i+1]){
+        i++
+    }
+    valley=prices[i]
+    //finding local max (peak)
+    while(i<len-1 && prices[i]<=prices[i+1]){
+        i++
+    }
+    peak=prices[i]
+    maxProfit+=peak-valley
+   }
+   return maxProfit
+   // if we see carefully the first approach does the same thing it can be visulaized correct on a graph about how actually we are making the profit by buying and selling at peaks and valleys.
+}
+console.log(best_time_to_buy_and_sell_stocks_2([7,1,5,3,6,4]))
+console.log(best_time_to_buy_and_sell_stocks_2([1,2,3,4,5]))
+console.log(best_time_to_buy_and_sell_stocks_2([7,6,4,3,1]))
