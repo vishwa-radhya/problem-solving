@@ -309,6 +309,47 @@ function best_time_to_buy_and_sell_stocks_2(prices){
    return maxProfit
    // if we see carefully the first approach does the same thing it can be visulaized correct on a graph about how actually we are making the profit by buying and selling at peaks and valleys.
 }
-console.log(best_time_to_buy_and_sell_stocks_2([7,1,5,3,6,4]))
-console.log(best_time_to_buy_and_sell_stocks_2([1,2,3,4,5]))
-console.log(best_time_to_buy_and_sell_stocks_2([7,6,4,3,1]))
+// console.log(best_time_to_buy_and_sell_stocks_2([7,1,5,3,6,4]))
+// console.log(best_time_to_buy_and_sell_stocks_2([1,2,3,4,5]))
+// console.log(best_time_to_buy_and_sell_stocks_2([7,6,4,3,1]))
+
+function check_if_array_is_sorted_and_rotated(nums){
+    let isSorted=true;
+    for(let i=0;i<nums.length-1;i++){
+        if(nums[i]>nums[i+1]){
+            isSorted=false;
+        }
+    }
+    if(isSorted) return true
+    let isRotated=true
+    let rotationPoint=0
+    let numOfRotationPoints=0
+    for(let i=0;i<nums.length-1;i++){
+        if(nums[i]>nums[i+1]){
+            rotationPoint=i;
+            numOfRotationPoints++
+        }
+    }
+    if(numOfRotationPoints>1) return false
+    if(numOfRotationPoints===1){
+        let k=0
+        let l=nums.length-1
+        rotationPoint++
+        while(k<l){
+            if(nums[rotationPoint%(l+1)]>nums[(rotationPoint+1)%(l+1)]){
+                isRotated=false
+            }
+            rotationPoint++
+            k++
+        }
+    }
+    if(isRotated) return true
+    return false
+    //beats 100% with 0ms
+}
+// console.log(check_if_array_is_sorted_and_rotated([1,2,3,4,5]))
+// console.log(check_if_array_is_sorted_and_rotated([3,4,5,1,2]))
+// console.log(check_if_array_is_sorted_and_rotated([5,4,3,2,1]))
+// console.log(check_if_array_is_sorted_and_rotated([2,1,3,4]))
+// console.log(check_if_array_is_sorted_and_rotated([6,10,6]))
+// console.log(check_if_array_is_sorted_and_rotated([10,1,1,10]))

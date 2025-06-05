@@ -87,4 +87,4 @@ function zigzag_conversion(s,numRows){
     mat[0][1]=1
     console.log(mat)
 }
-console.log(zigzag_conversion('PALPALISHIRING',3))
+// console.log(zigzag_conversion('PALPALISHIRING',3))
