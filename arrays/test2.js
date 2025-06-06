@@ -138,3 +138,51 @@ function summary_ranges(nums){
 }
 // console.log(summary_ranges([0,2,3,4,6,8,9]))
 // console.log(summary_ranges([0,1,2,4,5,7]))
+
+function contains_duplicate_2(nums,k){
+    //Given an integer array nums and an integer k, return true if there are two distinct indices i and j in the array such that nums[i] == nums[j] and abs(i - j) <= k.
+    // for(let i=0;i<nums.length-1;i++){
+    //     for(let j=i+1;j<nums.length;j++){
+    //         if(nums[i]===nums[j] && (Math.abs(i-j)<=k)){
+    //             return true
+    //         }
+    //     }
+    // }
+    // return false
+    // works but tle coz it is O(n^2)
+    // let i=0;
+    // let len =nums.length;
+    // let j=1;
+    // while(i<len-1){
+    //     if(j>=len){
+    //         i++ 
+    //         j=i+1
+    //     }
+    //     if(nums[i]==nums[j] && Math.abs(i-j)<=k && i!=j){
+    //         return true
+    //     }else{
+    //         j++
+    //     }
+    // }
+    // return false
+    //tle
+    // let i=0;
+    // let len =nums.length;
+    // let j=len-1;
+    // while(i<=j){
+    //     if(j<=i){
+    //         i++ 
+    //         j=len-1
+    //     }
+    //     if(nums[i]==nums[j] && Math.abs(i-j)<=k && i!=j){
+    //         return true
+    //     }else{
+    //         j--
+    //     }
+    // }
+    // return false
+    //tle
+}
+console.log(contains_duplicate_2([1,2,3,1],3))
+console.log(contains_duplicate_2([1,0,1,1],1))
+console.log(contains_duplicate_2([1,2,3,1,2,3],2))
