@@ -139,6 +139,44 @@ function summary_ranges(nums){
 // console.log(summary_ranges([0,2,3,4,6,8,9]))
 // console.log(summary_ranges([0,1,2,4,5,7]))
 
+function group_anagrams(strs){
+    if(strs.length ==1) return [[strs[0]]]
+    let set=new Set()
+    let obj={}
+    
+    // for(let i=0;i<strs.length;i++){
+    //     console.log(getAnagramValue(strs[i]))
+    // }
+    let i=0
+    while(i<strs.length){
+        if(!set.has(i)){
+            let val = getAnagramValue(strs[i])
+            set.add(i)
+            obj[val]=i
+
+            // obj[val][len]++
+        }
+        i++
+    }
+    // console.log(set);
+    return obj
+    
+    function getAnagramValue(str){
+        let sum=0;
+        for(let i=0;i<str.length;i++){
+            sum+=(str[i].charCodeAt()-97)%26
+        }
+        return sum
+    }
+}
+console.log(group_anagrams(["eat","tea","tan","ate","nat","bat"]))
+console.log(group_anagrams([""]))
+
+function resultant_array_after_removing_anagrams(words){
+
+}
+// console.log(resultant_array_after_removing_anagrams(["abba","baba","bbaa","cd","cd"]))
+
 function contains_duplicate_2(nums,k){
     //Given an integer array nums and an integer k, return true if there are two distinct indices i and j in the array such that nums[i] == nums[j] and abs(i - j) <= k.
     // for(let i=0;i<nums.length-1;i++){
@@ -182,7 +220,17 @@ function contains_duplicate_2(nums,k){
     // }
     // return false
     //tle
+    /**
+     * sifting to sliding window
+     */
+    // let set=new Set();
+    // let i=0,j=k
+    // let k=0
+    // let len = nums.length
+    // while(k<len-1){
+
+    // }
 }
-console.log(contains_duplicate_2([1,2,3,1],3))
-console.log(contains_duplicate_2([1,0,1,1],1))
-console.log(contains_duplicate_2([1,2,3,1,2,3],2))
+// console.log(contains_duplicate_2([1,2,3,1],3))
+// console.log(contains_duplicate_2([1,0,1,1],1))
+// console.log(contains_duplicate_2([1,2,3,1,2,3],2))

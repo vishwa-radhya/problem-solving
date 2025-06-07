@@ -260,3 +260,54 @@ function zig_zag_conversion(s,numRows){
 }
 // console.log(zig_zag_conversion("PAYPALISHIRING",3));
 // console.log(zig_zag_conversion("PAYPALISHIRING",4));
+function rotate_string(s,goal){
+    if(s.length !== goal.length) return false
+    return (s+s).includes(goal)
+    //0ms 
+    // let output = ""
+    // let temp = 0
+
+    // if (s.length !== goal.length) return false
+
+    // for (let i = 0; i < s.length; i++) {
+    //     let v1 = s.slice(0, i);
+    //     let v2 = s.slice(i);
+    //     let output = v2 + v1;
+    //     if (output === goal) {
+    //         return true;
+    //     }
+    // }
+    // return false;
+}
+// console.log(rotate_string("abcde","cdeab"))  
+function romanToInteger(s){
+    let obj={
+        'I':1,
+        'V':5,
+        'X':10,
+        'L':50,
+        'C':100,
+        'D':500,
+        'M':1000,
+    }
+    let ans=0
+    for(let i=0;i<s.length;i++){
+        let s1 = obj[s[i]]
+        if(i+1<s.length){
+            let s2 =obj[s[i+1]]
+            if(s1>=s2){
+                ans+=s1
+            }else{
+                ans-=s1
+            }
+        }else{
+            ans+=s1
+        }
+    }
+    return ans
+
+}
+// console.log(romanToInteger('III'))
+// console.log(romanToInteger('VI'))
+// console.log(romanToInteger('IV'))
+// console.log(romanToInteger('MCMXCIV'))
