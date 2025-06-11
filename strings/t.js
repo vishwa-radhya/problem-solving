@@ -311,3 +311,92 @@ function romanToInteger(s){
 // console.log(romanToInteger('VI'))
 // console.log(romanToInteger('IV'))
 // console.log(romanToInteger('MCMXCIV'))
+function multiplyStrings(num1,num2){
+    //  return String(BigInt(num1)*BigInt(num2))  
+    const n = num1.length, m = num2.length;
+    const result = Array(n + m).fill(0);
+    for (let i = n - 1; i >= 0; i--) {
+        for (let j = m - 1; j >= 0; j--) {
+            const mul = (num1[i] - '0') * (num2[j] - '0');
+            const sum = mul + result[i + j + 1];
+            result[i + j + 1] = sum % 10;
+            result[i + j] += Math.floor(sum / 10);
+        }
+    }
+    while (result[0] === 0 && result.length > 1) result.shift();
+    return result.join('');
+}
+// console.log(multiplyStrings("5","10"));
+function addBinary(a,b){
+    let aDecimal=0;
+    let bDecimal=0;
+    let k=0;
+    for(let i= a.length-1;i>=0;i--){
+        // aDecimal+=(a[i]-'0')*(2**k)
+        aDecimal+=Number(a[i])*(2**k)
+        k++
+        // can use parseInt()
+    }
+    k=0;
+    for(let i= b.length-1;i>=0;i--){
+        // bDecimal+=(b[i]-'0')*(2**k)
+        bDecimal+=Number(b[i])*(2**k)
+        k++
+    }
+    console.log(aDecimal)
+    console.log(bDecimal)
+    let sum = aDecimal+bDecimal;
+    if(sum==0){
+        return "0"
+    }
+    let binary=''
+    while(sum>0){
+        binary=(sum%2)+binary;
+        sum=Math.floor(sum/2);
+    }
+    // return binary
+}
+// console.log(addBinary("11","1"))
+// console.log(addBinary("1010","1011"))
+// console.log(addBinary("10100000100100110110010000010101111011011001101110111111111101000000101111001110001111100001101","110101001011101110001111100110001010100001101011101010000011011011001011101111001100000011011110011"))
+
+function number_of_segments_in_a_string(s){
+   s=s.trim()
+   if(s.length==0) return 0
+    let count=0
+    for(let i=0;i<s.length-1;i++){
+        if(Boolean(s[i].match(/\s/)) && Boolean(!s[i+1].match(/\s/))){
+            count++
+        }
+    }
+    return count+1
+}
+// console.log(number_of_segments_in_a_string("Hello, my name is John"));
+// console.log(number_of_segments_in_a_string("Hello,     John"));
+// console.log(number_of_segments_in_a_string("  Hello  ,  ,     "));
+// console.log(number_of_segments_in_a_string(", , , ,  a, eaefa"));
+
+function reverse_wods_in_a_string(s){
+    // return s.trim().split(' ').map(e=>e.split('').reverse().join('')).join(' ')
+    s=s.trim().split('')
+    let i=0,k=0
+    for(let j=0;j<s.length;j++){
+        while(j<s.length && !findWhiteSpace(s[j])) j++
+        k=j-1
+        // console.log(i,j,k)
+        while(i<=k){
+            let t =s[i]
+            s[i]=s[k]
+            s[k]=t
+            i++
+            k--
+        }
+        i=j+1
+        j++
+    }
+    function findWhiteSpace(c){
+        return /\s/.test(c)
+    }
+    return s.join('')
+}
+console.log(reverse_wods_in_a_string("Let's take LeetCode contest"))

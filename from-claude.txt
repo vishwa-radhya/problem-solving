@@ -1,0 +1,38 @@
+Phase 1: Complete Your Strong Foundations (Week 1-2)
+✅OrderTopicStatusKey Focus
+⬜1Arrays (Finish)10/10 doneComplete remaining: First Missing Positive, Increasing Triplet
+⬜2Strings (Finish)5/6 doneComplete: Guess the Word
+⬜3Bit Manipulation (Finish)2/7 doneHigh ROI topic - complete remaining 5 problems
+⬜4Two Pointers (Finish)3/5 doneComplete: 3Sum, Trapping Rain Water
+Phase 2: Essential Data Structures (Week 3-5)
+✅OrderTopicPriorityWhy Now
+⬜5Hash Tables🔥 CriticalFundamental for many advanced topics
+⬜6Linked List🔥 CriticalFoundation for trees, graphs
+⬜7Stack🔥 CriticalNeeded for recursion, DFS, expression problems
+⬜8Queue🔥 CriticalFoundation for BFS, sliding window
+Phase 3: Core Algorithms (Week 6-9)
+✅OrderTopicDependencyFocus
+⬜9Prefix SumArraysRange queries, subarray problems
+⬜10Sliding WindowTwo PointersFixed + dynamic window patterns
+⬜11Binary SearchArraysSearch space reduction
+⬜12RecursionStack knowledgeBase for backtracking, tree problems
+Phase 4: Advanced Patterns (Week 10-14)
+✅OrderTopicBuilds OnKey Insight
+⬜13Tree TraversalsRecursion, Stack, QueueDFS/BFS foundations
+⬜14DFS + BFSTrees, QueueGraph algorithms
+⬜15BacktrackingRecursion, DFSGenerate all possibilities
+⬜16Monotonic StackStackOptimization pattern
+⬜17Kadane's AlgorithmArraysDP introduction
+Phase 5: Optimization & Advanced Topics (Week 15-20)
+✅OrderTopicDifficultyStrategic Value
+⬜18GreedyMediumInterview favorite
+⬜19Heap/Priority QueueMediumTop-K problems
+⬜20IntervalsMediumScheduling problems
+⬜21TrieMediumString optimization
+⬜22DesignHardSystem design prep
+Phase 6: Advanced Algorithms (Week 21-24)
+✅OrderTopicComplexityWhen to Study
+⬜23Divide & ConquerHardAfter recursion mastery
+⬜24Union FindHardGraph connectivity
+⬜25Topological SortHardDependency resolution
+⬜26Dynamic ProgrammingHardFinal boss - multiple subtopics

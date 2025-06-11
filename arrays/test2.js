@@ -139,38 +139,93 @@ function summary_ranges(nums){
 // console.log(summary_ranges([0,2,3,4,6,8,9]))
 // console.log(summary_ranges([0,1,2,4,5,7]))
 
+function set_matrix_zeroes(matrix){
+    let rows = matrix.length
+    let cols=matrix[0].length
+    let record =[]
+    for(let i=0;i<rows;i++){
+        for(let j=0;j<cols;j++){
+            if(matrix[i][j]==0){
+                record.push([i,j])
+            }
+        }
+    }
+    for(let i=0;i<record.length;i++){
+        let currentRecord = record[i];
+        for(let j=0;j<rows;j++){
+            matrix[j][currentRecord[1]]=0;
+        }
+        for(let j=0;j<cols;j++){
+            matrix[currentRecord[0]][j]=0;
+        }
+    }
+    return matrix;
+    // works with 3ms tc and beats 59.11%
+    //1ms in java 72.22% 
+}
+// console.log(set_matrix_zeroes([[1,1,1],[1,0,1],[1,1,1]]))
+// console.log(set_matrix_zeroes([[0,1,2,0],[3,4,5,2],[1,3,1,5]]))
+
+function sort_colors(nums){
+    // where 0 is red, 1 is white,2 is blue
+    // return nums.sort((a,b)=>a-b)
+    // works with 1ms
+    // another appraoch
+    let left=0
+    let right =nums.length-1
+    let midpoint=0
+    while(midpoint<=right){
+        // console.log(left,midpoint,right)
+        // console.log(nums)
+        if(nums[midpoint]==0){
+            let t = nums[left]
+            nums[left]=nums[midpoint]
+            nums[midpoint]=t
+            left++
+            midpoint++
+        }else if(nums[midpoint]==1){
+            midpoint++
+        }
+        else{
+            let t = nums[midpoint]
+            nums[midpoint]=nums[right]
+            nums[right]=t
+            right--
+        }
+    }
+    return nums
+}
+// console.log(sort_colors([2,0,2,1,1,0]))
+
+function find_most_frequent_vowel_and_consonant(s){
+    let maxVowelCount=0
+    let maxConsonantCount=0
+    let vowelSet=new Set(['a','e','i','o','u'])
+    let obj={}
+    for(let letter of s){
+        obj[letter]=(obj[letter] || 0)+1
+    }
+    let obAr = Object.entries(obj)
+    for(let [key,val] of obAr){
+        if(vowelSet.has(key) && val>maxVowelCount){
+            maxVowelCount=val
+        }else if(!vowelSet.has(key) && val>maxConsonantCount){
+            maxConsonantCount=val
+        }
+    }
+    return maxVowelCount+maxConsonantCount
+}
+// 7ms tc with beat 53.48%
+// console.log(find_most_frequent_vowel_and_consonant("successes"));
+// console.log(find_most_frequent_vowel_and_consonant("aeiaeia"));
+
+
 function group_anagrams(strs){
     if(strs.length ==1) return [[strs[0]]]
-    let set=new Set()
-    let obj={}
-    
-    // for(let i=0;i<strs.length;i++){
-    //     console.log(getAnagramValue(strs[i]))
-    // }
-    let i=0
-    while(i<strs.length){
-        if(!set.has(i)){
-            let val = getAnagramValue(strs[i])
-            set.add(i)
-            obj[val]=i
 
-            // obj[val][len]++
-        }
-        i++
-    }
-    // console.log(set);
-    return obj
-    
-    function getAnagramValue(str){
-        let sum=0;
-        for(let i=0;i<str.length;i++){
-            sum+=(str[i].charCodeAt()-97)%26
-        }
-        return sum
-    }
 }
 console.log(group_anagrams(["eat","tea","tan","ate","nat","bat"]))
-console.log(group_anagrams([""]))
+// console.log(group_anagrams([""]))
 
 function resultant_array_after_removing_anagrams(words){
 
@@ -234,3 +289,4 @@ function contains_duplicate_2(nums,k){
 // console.log(contains_duplicate_2([1,2,3,1],3))
 // console.log(contains_duplicate_2([1,0,1,1],1))
 // console.log(contains_duplicate_2([1,2,3,1,2,3],2))
+
