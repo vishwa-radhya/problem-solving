@@ -31,29 +31,279 @@ function two_sum(nums,target){
 
 //1189
 function maximum_number_0f_balloons(text){
-    let obj={}
-    for(let t of text){
-        obj[t] = (obj[t] || 0)+1
-    }
-    let set=new Set(['b','a','l','o','n'])
-    let objArray = Object.entries(obj).filter(([key,])=>set.has(key))
-    if(objArray.length!=5){
-        return 0
-    }
-    console.log(objArray);
+    // let set=new Set(['b','a','l','o','n'])
+    // let map = new Map()
+    // let count =0
+    // for(let t of text){
+    //     if(set.has(t)){
+    //         if(!map.get(t)){
+    //             map.set(t,1)
+    //         }else{
+    //             map.set(t,map.get(t)+1)
+    //         }
+    //         count++
+    //     }
+    // }
+    // if(map.size!=5) return 0
+    // let balloonCount=0 
+    // while(count>0){
+    //     let c=0
+    //     for(let [key,val] of map){
+    //         if(val<=0){
+    //             return balloonCount
+    //         }
+    //         if((key == 'l' || key=='o') && val>=2){
+    //             map.set(key,val-2)
+    //             count-=2
+    //             c+=2
+    //         }else{
+    //             map.set(key,val-1)
+    //             count-=1
+    //             c+=1
+    //         }
+    //     }
+    //     if(c==7){
+    //         balloonCount++
+    //     }
+    //     c=0
+    // }
+    // return balloonCount
+    //gives 10ms tc with beat 20%
+    // let balloonCount=0
+    // let dict={
+    //     'b':0,'a':0,'l':0,'o':0,'n':0
+    // }
+    // for(let i=0;i<text.length;i++){
+    //     if(text[i] in dict){
+    //             dict[text[i]]+=1
+    //     }
+    // }
+    // const match = 'balloon';
+    // while(true){
+    //     for(let i=0;i<match.length;i++){
+    //         if(dict[match[i]]>0){
+    //             dict[match[i]]-=1
+    //         }else{
+    //             return balloonCount
+    //         }
+    //     }
+    //     balloonCount++
+    // }
+    //5ms tc with 79% beat
+    // this below one giving 0ms tc lol some random guessed thought
+    // let balloonMap = {
+    //     'b': 0,
+    //     'a': 0,
+    //     'l': 0,
+    //     'o': 0,
+    //     'n': 0
+    // }
+    // for(let letter of text) {
+    //     if('balon'.includes(letter)) {
+    //         balloonMap[letter] += 1
+    //     }
+    // }
+    // let maximumInstance = Number.MAX_VALUE
+    // maximumInstance = Math.min(maximumInstance, balloonMap['b'])
+    // maximumInstance = Math.min(maximumInstance, balloonMap['a'])
+    // maximumInstance = Math.min(maximumInstance, Math.floor(balloonMap['l'] / 2))
+    // maximumInstance = Math.min(maximumInstance, Math.floor(balloonMap['o'] / 2))
+    // maximumInstance = Math.min(maximumInstance, balloonMap['n'])
     
-    let count=0
-    for(let [key,val] of objArray){
-        if(key=='l' || key=='o'){
-            count+=Math.floor(val/2)
-        }else{
-            count+=val
-        }
-    }
-    return Math.floor(count/5)
+    // return maximumInstance
 }
 // console.log(maximum_number_0f_balloons("nlaebolko"))
 // console.log(maximum_number_0f_balloons("loonbalxballpoon"))
 // console.log(maximum_number_0f_balloons("leetcode"))
-console.log(maximum_number_0f_balloons("balllllllllllloooooooooon"))
+// console.log(maximum_number_0f_balloons("balllllllllllloooooooooon"))
 
+
+//205. isomorphic strings
+function isIsomorphic(s,t){
+    // if(s.length !== t.length) return false
+    // let sAr=[]
+    // let tAr=[]
+    // let map1 =new Map()
+    // let map2 =new Map()
+    // for(let i=0;i<s.length;i++){
+    //     let val = map1.get(s[i])
+    //     if(val){
+    //         sAr.push(val)
+    //     }else{
+    //         sAr.push(i+1)
+    //         map1.set(s[i],i+1)
+    //     }
+    // }
+    // for(let i=0;i<t.length;i++){
+    //     let val = map2.get(t[i])
+    //     if(val){
+    //         tAr.push(val)
+    //     }else{
+    //         tAr.push(i+1)
+    //         map2.set(t[i],i+1)
+    //     }
+    // }
+    // for(let i=0;i<sAr.length;i++){
+    //     if(sAr[i]!==tAr[i]){
+    //         return false
+    //     }
+    // }
+    // return true
+    // 6ms tc with 6ms beat
+    //try optimizing 
+    // if(s.length !== t.length) return false
+    // let sAr=[]
+    // let tAr=[]
+    // let map1 =new Map()
+    // let map2 =new Map()
+    // for(let i=0;i<s.length;i++){
+    //     let val = map1.get(s[i])
+    //     if(val){
+    //         sAr.push(val)
+    //     }else{
+    //         sAr.push(i+1)
+    //         map1.set(s[i],i+1)
+    //     }
+    // }
+    // for(let i=0;i<t.length;i++){
+    //     let val = map2.get(t[i])
+    //     if(val){
+    //         tAr.push(val)
+    //     }else{
+    //         tAr.push(i+1)
+    //         map2.set(t[i],i+1)
+    //     }
+    //     if(sAr[i]!=tAr[i]){
+    //         return false
+    //     }
+    // }
+    // return true
+    // works the same just eliminated a loop'
+    // now with single loop
+    if(s.length != t.length) return false
+    let sO={}
+    let tO={}
+    for(let i=0;i<s.length;i++){
+        if(sO[s[i]]!==tO[t[i]]) return false
+        sO[s[i]]=i
+        tO[t[i]]=i
+    }
+    return true
+    // most optimized one above
+}
+// console.log(isIsomorphic('egg','add'))
+// console.log(isIsomorphic('foo','bar'))
+// console.log(isIsomorphic('paper','title'))
+
+// 1512 
+function number_of_good_pairs(nums){
+    // let count=0
+    // for(let i=0;i<nums.length-1;i++){
+    //     for(let j=i+1;j<nums.length;j++){
+    //         if(nums[i] == nums[j]) count++
+    //     }
+    // }
+    // return count
+    // brute force approach gave 1ms tc with beat 43%
+    // i found a math that if a number appears n times n(n-1)//2 good 
+    // pairs can be made through it
+    let count=0
+    let obj={}
+    for(let i=0;i<nums.length;i++){
+        obj[nums[i]] = (obj[nums[i]] || 0)+1
+    }
+    for(let val of Object.values(obj)){
+        count+=Math.floor((val*(val-1))/2)
+    }
+    return count
+    // 0ms tc with 100% beat
+} 
+// console.log(number_of_good_pairs([1,2,3,1,1,3]));
+// console.log(number_of_good_pairs([1,1,1,1]));
+// console.log(number_of_good_pairs([1,2,3  ]));
+
+function ransom_note(ransomNote,magazine){
+    // let obj = {}
+    // for(let i=0;i<magazine.length;i++){
+    //     obj[magazine[i]] = (obj[magazine[i]] || 0)+1
+    // }
+    // for(let i=0;i<ransomNote.length;i++){
+    //     let char = ransomNote[i]
+    //     if((!obj[char]) || obj[char]<=0){
+    //         return false
+    //     }
+    //     obj[char]=obj[char]-1
+    // }
+    // return true
+    // 19ms with 52% beat
+    // found another crazy one with less tc
+    // for(let char of magazine){
+    //     ransomNote = ransomNote.replace(char,'')
+    // }
+    // return !ransomNote ? true :false
+    // has 8ms tc with 93% beat
+    // for(let char of ransomNote){
+    //     let index = magazine.indexOf(char)
+    //     if(index===-1) return false
+    //     magazine = magazine.slice(0, index) + magazine.slice(index + 1);
+    // }
+    // return true
+    // the 4ms approach
+    // doing the 19ms approach with a array of 26 len gives 0ms lol
+    // let hash=new Array(26).fill(0)
+    // for(let i=0;i<magazine.length;i++){
+    //     hash[magazine.charCodeAt(i)-97]+=1
+    // }
+    // for(let i=0;i<ransomNote.length;i++){
+    //     if(hash[ransomNote.charCodeAt(i)-97]==0) return false
+    //     hash[ransomNote.charCodeAt(i)-97]-=1
+    // }   
+    // return true
+}
+// console.log(ransom_note('a','b'));
+// console.log(ransom_note('aa','ab'));
+// console.log(ransom_note('aa','aab'));
+// console.log(ransom_note('aab','baa'));
+
+
+
+// 706. design hashMap
+let myHashMap = function(){
+
+}
+myHashMap.prototype.put=function(key,value){
+
+}
+myHashMap.prototype.get=function(key){
+
+}
+myHashMap.prototype.remove=function(key){
+
+}
+/**
+ * MyHashMap() initializes the object with an empty map.
+void put(int key, int value) inserts a (key, value) pair into the HashMap. If the key already exists in the map, update the corresponding value.
+int get(int key) returns the value to which the specified key is mapped, or -1 if this map contains no mapping for the key.
+void remove(key) removes the key and its corresponding value if the map contains the mapping for the key.
+ */
+
+/**
+ * Input
+["MyHashMap", "put", "put", "get", "get", "put", "get", "remove", "get"]
+[[], [1, 1], [2, 2], [1], [3], [2, 1], [2], [2], [2]]
+Output
+[null, null, null, 1, -1, null, 1, null, -1]
+ */
+
+/**
+ * Explanation
+MyHashMap myHashMap = new MyHashMap();
+myHashMap.put(1, 1); // The map is now [[1,1]]
+myHashMap.put(2, 2); // The map is now [[1,1], [2,2]]
+myHashMap.get(1);    // return 1, The map is now [[1,1], [2,2]]
+myHashMap.get(3);    // return -1 (i.e., not found), The map is now [[1,1], [2,2]]
+myHashMap.put(2, 1); // The map is now [[1,1], [2,1]] (i.e., update the existing value)
+myHashMap.get(2);    // return 1, The map is now [[1,1], [2,1]]
+myHashMap.remove(2); // remove the mapping for 2, The map is now [[1,1]]
+myHashMap.get(2);    // return -1 (i.e., not found), The map is now [[1,1]]
+ */
