@@ -82,18 +82,18 @@ function product_of_array_except_itself(nums){
     // return output
     // successfully but can be optimzed through eliminating prefix or suffix arrays
     // by precompiting prefix and assiging as output initially and multiplyting with suffix and and updating on the fly
-    let length=nums.length
-    let output=[]
-    output[0]=1
-    for(let i=1;i<length;i++){
-        output[i]=output[i-1]*nums[i-1]
-    }
-    let currentSuffixProduct=1
-    for(let i=length-1;i>=0;i--){
-        output[i]=output[i]*currentSuffixProduct
-        currentSuffixProduct=currentSuffixProduct*nums[i]
-    }
-    return output
+    // let length=nums.length
+    // let output=[]
+    // output[0]=1
+    // for(let i=1;i<length;i++){
+    //     output[i]=output[i-1]*nums[i-1]
+    // }
+    // let currentSuffixProduct=1
+    // for(let i=length-1;i>=0;i--){
+    //     output[i]=output[i]*currentSuffixProduct
+    //     currentSuffixProduct=currentSuffixProduct*nums[i]
+    // }
+    // return output
     // little variable tweak can get lesser tc
 }
 // console.log(product_of_array_except_itself([1,2,3,4]))

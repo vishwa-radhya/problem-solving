@@ -125,7 +125,7 @@ function valid_anagram(s,t){
     // return s.split('').sort().join('') == t.split('').sort().join('')
     // 31ms tc beats 20%
     // if(s.length !== t.length) return false
-    // let hash=new Array(26).fill(0)
+    let hash=new Array(26).fill(0)
     // for(let i=0;i<s.length;i++){
     //     hash[s[i].charCodeAt(0)-'a'.charCodeAt(0)]++
     //     hash[t[i].charCodeAt(0)-'a'.charCodeAt(0)]--

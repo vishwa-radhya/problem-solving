@@ -95,3 +95,31 @@ return maxArea
 // console.log(max_area([1,8,6,2,5,4,8,3,7]))
 // console.log(max_area([1,1]))
 // console.log(max_area([1,2,1]))
+
+function three_sum(nums){
+    let res=[]
+    let len = nums.length
+    for(let i=0;i<=len-3;i++){
+        let j = i+1
+        let k = len-1
+        while(j<k){
+            let sum=0
+            sum=nums[i]+nums[j]+nums[k]
+            if(sum==0) res.push([i,j,k])
+            j++
+            if(j<k){
+                sum=nums[i]+nums[j]+nums[k]
+                if(sum==0) res.push([i,j,k])
+            }
+            k--
+            if(j<k){
+                sum=nums[i]+nums[j]+nums[k]
+                if(sum==0) res.push([i,j,k])
+            }
+        }
+    }
+    return res
+}
+// console.log(three_sum([-1,0,1,2,-1,4]))
+// console.log(three_sum([0,0,1]))
+// console.log(three_sum([0,0,0]))

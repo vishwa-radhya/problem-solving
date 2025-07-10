@@ -265,6 +265,44 @@ function ransom_note(ransomNote,magazine){
 // console.log(ransom_note('aa','aab'));
 // console.log(ransom_note('aab','baa'));
 
+// 219 contains duplicate ii
+function contains_duplicate_2(nums,k){
+    // for(let i=0;i<nums.length;i++){
+    //     for(let j=i+1;j<=i+k && j<nums.length;j++){
+    //         if(nums[i]==nums[j]) return true
+    //     }
+    // }
+    // return false
+    // 793ms tc beat 5.48%
+    let set = new Set();
+    for(let i=0;i<nums.length;i++){
+        if(set.has(nums[i])){
+            return true
+        }
+        set.add(nums[i])
+        if(set.size>k){
+            set.delete(nums[i-k])
+        }
+    }
+    return false
+    // 22ms 2ith 84% beat
+    // using map
+    // let map = new Map()
+    // for(let i=0;i<nums.length;i++){
+    //     if(map.has(nums[i]) && i-map.get(nums[i])<=k){
+    //         return true
+    //     }
+    //     map.set(nums[i],i)
+    // }
+    // return false
+    //32 ms with 50% beat
+}
+// console.log(contains_duplicate_2([1,2,3,1],3))
+// console.log(contains_duplicate_2([1,0,1,1],1))
+// console.log(contains_duplicate_2([1,2,3,1,2,3],2))
+// console.log(contains_duplicate_2([99,99],2))
+// console.log(contains_duplicate_2([1,2,3,4,5,6,7,8,9,9],3))
+
 
 
 // 706. design hashMap
@@ -307,3 +345,4 @@ myHashMap.get(2);    // return 1, The map is now [[1,1], [2,1]]
 myHashMap.remove(2); // remove the mapping for 2, The map is now [[1,1]]
 myHashMap.get(2);    // return -1 (i.e., not found), The map is now [[1,1]]
  */
+
