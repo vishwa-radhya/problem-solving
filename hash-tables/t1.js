@@ -144,5 +144,29 @@ function number_of_matching_subsequences(s,words){
         if(found) count++
     }
 }
-console.log(number_of_matching_subsequences('abcde',['a','bb','acd','ace']))
-console.log(number_of_matching_subsequences('dsahjpjauf',["ahjpjau","ja","ahbwzgqnuk","tnmlanowax"]))
+// console.log(number_of_matching_subsequences('abcde',['a','bb','acd','ace']))
+// console.log(number_of_matching_subsequences('dsahjpjauf',["ahjpjau","ja","ahbwzgqnuk","tnmlanowax"]))
+
+function top_k_frequent_elements(nums,k){
+    // let map = new Map()
+    // for(let i=0;i<nums.length;i++){
+    //     if(!map.has(nums[i])) map.set(nums[i],1)
+    //     else map.set(nums[i],map.get(nums[i])+1)
+    // }
+    // let mapEntries = Array.from(map.entries()).sort((a,b)=>a[1]-b[1])
+    // let rtn=[]
+    // for(let i=mapEntries.length-1;i>mapEntries.length-1-k;i--){
+    //     rtn.push(mapEntries[i][0])
+    // }
+    // return rtn
+    // 7ms with 90.02% up beat
+    // now the 4ms beat one looks clean and pure js 
+    // const map = new Map()
+    // nums.forEach(num=>{
+    //     map.set(num,(map.get(num) || 0)+1)
+    // })
+    // return [...map.entries()].sort((a,b)=>b[1]-a[1]).slice(0,k).map(arr=>arr[0])
+    // the 3ms beat sol is the coolest one i have seen with js just reducing lines to js particularly
+    return [...nums.reduce((m, n) => m.set(n, (m.get(n) || 0) + 1), new Map()).entries()].sort((a, b) => b[1] - a[1]).slice(0, k).map(([key]) => key);
+}
+// console.log(top_k_frequent_elements([1,1,1,2,2,3],2))

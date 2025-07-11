@@ -290,3 +290,144 @@ function contains_duplicate_2(nums,k){
 // console.log(contains_duplicate_2([1,0,1,1],1))
 // console.log(contains_duplicate_2([1,2,3,1,2,3],2))
 
+function top_k_frequent_elements(nums,k){
+    // let map = new Map()
+    // for(let i=0;i<nums.length;i++){
+    //     if(!map.has(nums[i])) map.set(nums[i],1)
+    //     else map.set(nums[i],map.get(nums[i])+1)
+    // }
+    // let mapEntries = Array.from(map.entries()).sort((a,b)=>a[1]-b[1])
+    // let rtn=[]
+    // for(let i=mapEntries.length-1;i>mapEntries.length-1-k;i--){
+    //     rtn.push(mapEntries[i][0])
+    // }
+    // return rtn
+    // 7ms with 90.02% up beat
+    // now the 4ms beat one looks clean and pure js 
+    // const map = new Map()
+    // nums.forEach(num=>{
+    //     map.set(num,(map.get(num) || 0)+1)
+    // })
+    // return [...map.entries()].sort((a,b)=>b[1]-a[1]).slice(0,k).map(arr=>arr[0])
+    // the 3ms beat sol is the coolest one i have seen with js just reducing lines to js particularly
+    return [...nums.reduce((m, n) => m.set(n, (m.get(n) || 0) + 1), new Map()).entries()].sort((a, b) => b[1] - a[1]).slice(0, k).map(([key]) => key);
+}
+// console.log(top_k_frequent_elements([1,1,1,2,2,3],2))
+
+function valid_sudoku(board){
+    let set = new Set()
+    //by row
+    for(let i=0;i<9;i++){
+        for(let j=0;j<9;j++){
+            if(!set.has(board[i][j])){
+                set.add(board[i][j])
+            }else{
+                if(board[i][j]!='.'){
+                    // console.log('hit at row check')
+                    return false
+                }
+            }
+        }
+        set.clear()
+    }
+    // by col
+    for(let i=0;i<9;i++){
+        for(let j=0;j<9
+            ;j++){
+            if(!set.has(board[j][i])){
+                set.add(board[j][i])
+            }else{
+                if(board[j][i]!='.'){
+                    // console.log('hit at col check')
+                    return false
+                }
+            }
+        }
+        set.clear()
+    }
+    // by box
+    let indexArray =[[0,1,2],[3,4,5],[6,7,8]]
+    for(let i=0;i<indexArray.length;i++){
+        let curr = indexArray[i]
+    // return true
+        // let map1 = indexArray[0]
+        // for(let j of curr){
+        //     for(let k of map1){
+        //         if(!set.has(board[j][k])){
+        //             set.add(board[j][k])
+        //         }else{
+        //             if(board[j][k]!='.'){
+        //                 // console.log('hit from',i,j,k)
+        //                 return false
+        //             }
+        //         }
+        //     }
+        // }
+        // set.clear()
+        // let map2 = indexArray[1]
+        // for(let j of curr){
+        //     for(let k of map2){
+        //         if(!set.has(board[j][k])){
+        //             set.add(board[j][k])
+        //         }else{
+        //             if(board[j][k]!='.'){
+        //                 // console.log('hit from',i,j,k)
+        //                 return false
+        //             }
+        //         }
+        //     }
+        // }
+        // set.clear()
+        // let map3 = indexArray[2]
+        // for(let j of curr){
+        //     for(let k of map3){
+        //         if(!set.has(board[j][k])){
+        //             set.add(board[j][k])
+        //         }else{
+        //             if(board[j][k]!='.'){
+        //                 // console.log('hit from',i,j,k)
+        //                 return false
+        //             }
+        //         }
+        //     }
+        // }
+        // set.clear()
+        // runs with 6ms 50%
+        // now looping with mapers
+        let mapper =[indexArray[0],indexArray[1],indexArray[2]]
+        for(let map of mapper){
+            for(let j of curr){
+                for(let k of map){
+                    if(!set.has(board[j][k])){
+                        set.add(board[j][k])
+                    }else{
+                        if(board[j][k]!='.'){
+                            return false
+                        }
+                    }
+                }
+        }
+        set.clear()
+    }
+    // we got 3ms with 88.66%
+    }
+    return true
+}
+// console.log(valid_sudoku([["5","3",".",".","7",".",".",".","."]
+// ,["6",".",".","1","9","5",".",".","."]
+// ,[".","9","8",".",".",".",".","6","."]
+// ,["8",".",".",".","6",".",".",".","3"]
+// ,["4",".",".","8",".","3",".",".","1"]
+// ,["7",".",".",".","2",".",".",".","6"]
+// ,[".","6",".",".",".",".","2","8","."]
+// ,[".",".",".","4","1","9",".",".","5"]
+// ,[".",".",".",".","8",".",".","7","9"]]))
+// console.log(valid_sudoku([["8","3",".",".","7",".",".",".","."]
+// ,["6",".",".","1","9","5",".",".","."]
+// ,[".","9","8",".",".",".",".","6","."]
+// ,["8",".",".",".","6",".",".",".","3"]
+// ,["4",".",".","8",".","3",".",".","1"]
+// ,["7",".",".",".","2",".",".",".","6"]
+// ,[".","6",".",".",".",".","2","8","."]
+// ,[".",".",".","4","1","9",".",".","5"]
+// ,[".",".",".",".","8",".",".","7","9"]]))
