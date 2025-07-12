@@ -98,28 +98,58 @@ return maxArea
 
 function three_sum(nums){
     let res=[]
-    let len = nums.length
-    for(let i=0;i<=len-3;i++){
-        let j = i+1
-        let k = len-1
-        while(j<k){
-            let sum=0
-            sum=nums[i]+nums[j]+nums[k]
-            if(sum==0) res.push([i,j,k])
-            j++
-            if(j<k){
-                sum=nums[i]+nums[j]+nums[k]
-                if(sum==0) res.push([i,j,k])
-            }
-            k--
-            if(j<k){
-                sum=nums[i]+nums[j]+nums[k]
-                if(sum==0) res.push([i,j,k])
+    nums.sort((a,b)=>a-b)
+    for(let i=0;i<nums.length-2;i++){
+        if(i>0 && nums[i]==nums[i-1]){
+            continue;
+        }
+        let l=i+1;
+        let r = nums.length-1;
+        while(l<r){
+            let sum = nums[i]+nums[l]+nums[r];
+            if(sum >0){
+                r-=1;
+            }else if(sum<0){
+                l+=1;
+            }else{
+                res.push([nums[i],nums[l],nums[r]]);
+                l+=1
+                while(nums[l] == nums[l-1] && l<r){
+                    l+=1
+                }
             }
         }
     }
     return res
+    // 37ms with 54.42% beat
+    // 21ms is the highest with same approach 
 }
 // console.log(three_sum([-1,0,1,2,-1,4]))
 // console.log(three_sum([0,0,1]))
 // console.log(three_sum([0,0,0]))
+
+function trapping_rain_water(height){
+    let trapCount=0
+    let len = height.length;
+    let j;
+    for(let i=0;i<len-1;i++){
+        if(height[0]==0) {
+            continue;
+        }
+        j=i+1;
+        while(j<len){
+            if(height[j]<height[i]){
+                j++
+            }else{
+                if(j-i>1){
+                    break
+                }
+            }
+            j++
+        }
+        console.log(i,j)
+        break
+    }
+}
+// console.log(trapping_rain_water([0,1,0,2,1,0,1,3,2,1,2,1])) // 6
+// console.log(trapping_rain_water([4,2,0,3,2,5])) // 9
