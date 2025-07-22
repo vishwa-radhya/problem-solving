@@ -180,3 +180,24 @@ function find_peak_element(nums){
 // console.log(find_peak_element([1,2,3,1]))
 // console.log(find_peak_element([1,2,1,3,5,6,4]))
 // console.log(find_peak_element([6,5,4,3,2,3,2]))
+function koko_eating_bananas(piles,h){
+    let low = 1;
+    let high = Math.max(...piles)
+    while(low<high){
+        let mid = Math.floor((low+high)/2)
+        let hours=0
+        for(let pile of piles){
+            hours+=Math.ceil(pile/mid)
+        }
+        if(hours<=h){
+            high =mid
+        }else{
+            low=mid+1
+        }
+    }
+    return low
+}
+//7ms with 88.83% beat
+// console.log(koko_eating_bananas([3,6,7,11],8)) //4
+// console.log(koko_eating_bananas([30,11,23,4,20],5)) //30
+// console.log(koko_eating_bananas([30,11,23,4,20],6)) //23

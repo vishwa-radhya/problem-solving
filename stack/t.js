@@ -437,3 +437,56 @@ function recursive(openCount,closeCount,str,res){
 // console.log(generate_parentheses(2))
 // console.log(generate_parentheses(3))
 // console.log(generate_parentheses(1))
+
+function minimum_remove_to_make_valid_parentheses(s){
+    let o={'(':')'}
+    let skipIndices=[]
+    let skipIndicesLen=0
+    for(let i=0;i<s.length;i++){
+        if(s[i]==')' || s[i]=='('){
+            if(skipIndicesLen == 0){
+                skipIndices.push(i)
+                skipIndicesLen++
+            }else{
+                if(s[i]==')' && o[s[skipIndices[skipIndicesLen-1]]]==')'){
+                    skipIndices.pop()
+                    skipIndicesLen--
+                }else{
+                    skipIndices.push(i)
+                    skipIndicesLen++
+                }
+            }
+        }
+    }
+    let r=''
+    let set = new Set(skipIndices)
+    for(let i=0;i<s.length;i++){
+        if(!set.has(i)){
+            r+=s[i]
+        }
+    }
+    return r
+    // worked with 21ms and 53.11% beat
+    // the 8ms sol looks *****************cool***************
+    // const chars = s.split('');
+    // const stack = [];
+
+    // for (let i = 0; i < chars.length; i++) {
+    //     if (chars[i] == '(') {
+    //         stack.push(i);
+    //     } else if (chars[i] == ')' && stack.length) {
+    //         stack.pop();
+    //     } else if (chars[i] == ')' && !stack.length){
+    //         chars[i] = '';
+    //     }
+    // }
+
+    // for (let i = 0; i < stack.length; i++) {
+    //     chars[stack[i]] = '';
+    // }
+
+    // return chars.join('');
+}
+console.log(minimum_remove_to_make_valid_parentheses('lee(t(c)o)de)'))
+console.log(minimum_remove_to_make_valid_parentheses('a)b(c)d'))
+console.log(minimum_remove_to_make_valid_parentheses('))(('))
