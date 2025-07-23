@@ -103,11 +103,91 @@ function minimum_size_subarray_sum(target,nums){
 // console.log(minimum_size_subarray_sum(11,[1,2,3,4,5])) //3
 
 function max_consecutive_ones_III(nums,k){
-    let overallZeroCount=0
-    for(let num of nums) if(num == 0) overallZeroCount++
-    if(overallZeroCount == 0) return nums.length
-    if(overallZeroCount == nums.length) return 0
+    // let overallZeroCount=0
+    // for(let num of nums) if(num == 0) overallZeroCount++
+    // if(overallZeroCount == 0) return nums.length
+    // if(nums.length==1 && k==1) return 1
+    // if(overallZeroCount == nums.length) return 0
+    // if(k == nums.length) return nums.length
+    // if(k==0){
+    //     let onesCount=0
+    //     let maxOnesCount=0
+    //     for(let num of nums){
+    //         if(num ==0){
+    //             console.log(onesCount,maxOnesCount)
+    //             maxOnesCount = Math.max(maxOnesCount,onesCount)
+    //             onesCount=0
+    //         }else{
+    //             onesCount++
+    //         }
+    //     }
+    //     return maxOnesCount > onesCount ? maxOnesCount : onesCount
+    // }
+    // let l=0
+    // let r=0
+    // let maxConsecOnesLen=0
+    // let zeroCount=0
+    // while(l<=r && r<nums.length){
+    //     r=l
+    //     while(zeroCount<=k && r<nums.length){
+    //         if(nums[r]==0) zeroCount++
+    //         if(zeroCount > k) break
+    //         r++
+    //     }
+    //     maxConsecOnesLen = Math.max(maxConsecOnesLen,(r-l))
+    //     l++
+    //     zeroCount=0
+    // }
+    // return maxConsecOnesLen
+    //worked with 969ms tc with 5.02% beat has O(n^2) with worst low-beat
+    // optims now always expanding right and shrinking left cleanly to maintain a sliding window
+    let left=0
+    let maxLen =0
+    let zeroes=0
+    for(let right=0;right<nums.length;right++){
+        if(nums[right]==0) zeroes++
+        while(zeroes > k){
+            if(nums[left]==0) zeroes--
+            left++
+        }
+        maxLen = Math.max(maxLen,right-left+1)
+        // console.log(left,right)
+    }
+    return maxLen
+    //2ms tc with 85.75% beat
+}
+// console.log(max_consecutive_ones_III([1,1,1,0,0,0,1,1,1,1,0],2)) //6
+// console.log(max_consecutive_ones_III([0,0,1,1,0,0,1,1,1,0,1,1,0,0,0,1,1,1,1],3)) //10
+// console.log(max_consecutive_ones_III([0,0,0,1],4)) //4
+// console.log(max_consecutive_ones_III([0,0,1,1],1)) //3
+// console.log(max_consecutive_ones_III([0,0,1,1,1,0,0],0)) //3
+// console.log(max_consecutive_ones_III([1,1,1,0,0,0,1,1,1,1],0)) //4
+// console.log(max_consecutive_ones_III([0],1)) //1
+
+function longest_repeating_character_replacement(s,k){
+    // 
+}
+// console.log(longest_repeating_character_replacement('ABAB',2))
+// console.log(longest_repeating_character_replacement('AABABBA',1))
+
+function sliding_window_maximum(nums,k){
+    //brute force
+    // let res=[]
+    // for(let i=0;i<nums.length;i++){
+    //     let slice = nums.slice(i,i+k)
+    //     if(slice.length < k) break
+    //     res.push(getMax(slice))
+    // }
+    // function getMax(slice){
+    //     let max=slice[0]
+    //     for(let num of slice){
+    //         if(num>max) max=num
+    //     }
+    //     return max
+    // }
+    // return res
+    // tle at 37/51 due to O(n*k)
     
 }
-console.log(max_consecutive_ones_III([1,1,1,0,0,0,1,1,1,1,0],2))
-console.log(max_consecutive_ones_III([0,0,1,1,0,0,1,1,1,0,1,1,0,0,0,1,1,1,1],3))
+// console.log(sliding_window_maximum([1,3,-1,-3,5,3,6,7],3))
+// console.log(sliding_window_maximum([1],1))

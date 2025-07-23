@@ -411,31 +411,49 @@ function basic_calculator_II(s){
 // console.log(basic_calculator_II("0-214"))
 
 function generate_parentheses(n){
-    let res=[]
-    let str=""
-    let openCount=n
-    let closeCount=n
-    recursive(openCount,closeCount,str,res)
-    return res
-}
-function recursive(openCount,closeCount,str,res){
-        if(openCount==0 && closeCount==0) {
-            res.push(str)
-            return
+    // let stack=[]
+    // let res=[]
+    // function backtrack(open,close){
+    //     // console.log("open:",open,"close:",close)
+    //     // console.log("stack: ",stack)
+    //     if(open==n && close==n){
+    //         res.push(stack.join(''))
+    //         return
+    //     }
+    //     if(open<n){
+    //         stack.push('(')
+    //         backtrack(open+1,close)
+    //         stack.pop()
+    //     }
+    //     if(close<open){
+    //         stack.push(')')
+    //         backtrack(open,close+1)
+    //         stack.pop()
+    //     }
+    // }
+    // backtrack(0,0)
+    // return res
+    // 2ms tc with 41.08% beat
+    // the 1ms sol the upbeat one
+    let ans=[];
+    function dp(openP,closeP,s){
+        console.log(s)
+        if(openP===closeP && openP===n && closeP===n){
+            ans.push(s);
+            return;
         }
-        if(openCount==0 && closeCount>0){
-            recursive(openCount,closeCount-1,str+=")",res)
+        if(openP<n){
+            dp(openP+1,closeP,s+"(");
         }
-        if(closeCount==0 && openCount>0){
-            recursive(openCount-1,closeCount,str+="(",res)
-        }
-        if(openCount>0 && closeCount>0){
-            let left = recursive(openCount-1,closeCount,str+="(",res)
-            let right = recursive(openCount,closeCount-1,str+=")",res)
+        if(closeP<openP){
+            dp(openP,closeP+1,s+")");
         }
     }
-// console.log(generate_parentheses(2))
+    dp(0,0,"");
+    return ans;
+}
 // console.log(generate_parentheses(3))
+// console.log(generate_parentheses(2))
 // console.log(generate_parentheses(1))
 
 function minimum_remove_to_make_valid_parentheses(s){
@@ -487,6 +505,6 @@ function minimum_remove_to_make_valid_parentheses(s){
 
     // return chars.join('');
 }
-console.log(minimum_remove_to_make_valid_parentheses('lee(t(c)o)de)'))
-console.log(minimum_remove_to_make_valid_parentheses('a)b(c)d'))
-console.log(minimum_remove_to_make_valid_parentheses('))(('))
+// console.log(minimum_remove_to_make_valid_parentheses('lee(t(c)o)de)'))
+// console.log(minimum_remove_to_make_valid_parentheses('a)b(c)d'))
+// console.log(minimum_remove_to_make_valid_parentheses('))(('))
