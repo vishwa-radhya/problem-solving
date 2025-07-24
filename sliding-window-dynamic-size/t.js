@@ -165,10 +165,89 @@ function max_consecutive_ones_III(nums,k){
 // console.log(max_consecutive_ones_III([0],1)) //1
 
 function longest_repeating_character_replacement(s,k){
-    // 
+    // if(k==0){
+    //     let f=1
+    //     let p =1
+    //     for(let i=0;i<s.length-1;i++){
+    //         if(s[i]==s[i+1]) p++
+    //         if(s[i]!=s[i+1]){
+    //             f=Math.max(f,p)
+    //             p=1
+    //         }
+    //     }
+    //     f=Math.max(f,p)
+    //     return f
+    // }
+    // let longestRepeatingCharacterSeq=0
+    // let presentMaxCharCount=0
+    // let presentMaxChar;
+    // let map = new Map()
+    // let l=0
+    // for(let r=0;r<s.length;r++){
+    //     map.set(s[r],(map.get(s[r]) || 0)+1)
+    //     presentMaxCharCount = Math.max(presentMaxCharCount,map.get(s[r]))
+    //     while((r-l+1)-presentMaxCharCount>k){
+    //         let char = s[l]
+    //         if(presentMaxChar == char) presentMaxCharCount--
+    //         map.set(char,map.get(char)-1)
+    //         l++
+    //     }
+    //     longestRepeatingCharacterSeq = Math.max(longestRepeatingCharacterSeq,(r-l+1))
+    // }
+    // return longestRepeatingCharacterSeq
+    // 21ms with 43.31% beat
+    // the 17ms and most used version
+    // let left = 0;
+    // let maxCount = 0;
+    // let maxLen = 0;
+    // const charFreq = {};
+    // for(let right = 0; right<s.length; right++){
+    //     const char = s[right];
+    //     charFreq[char] = (charFreq[char] || 0) + 1;
+    //     maxCount = Math.max(maxCount, charFreq[char]);
+    //     while (right-left+1 - maxCount > k){
+    //         charFreq[s[left]]--;
+    //         left++;
+    //     }
+    //     maxLen = Math.max(maxLen, right - left + 1); 
+    // }
+    // return maxLen;
+    //using a 26len array reduces the tc to 2ms its good coz the string contains only capital ones
+    let left = 0;
+     let charFreq = new Array(26).fill(0);
+     let maxFreq = 0;
+     for (let right = 0; right < s.length; right++) {
+        charFreq[s.charCodeAt(right) - 65]++
+        maxFreq = Math.max(maxFreq, charFreq[s.charCodeAt(right) - 65])
+        if ((right - left + 1) - maxFreq > k) {
+            charFreq[s.charCodeAt(left) - 65]--
+            left++
+        }
+     }
+     return s.length - left
 }
-// console.log(longest_repeating_character_replacement('ABAB',2))
-// console.log(longest_repeating_character_replacement('AABABBA',1))
+// console.log(longest_repeating_character_replacement('ABAB',2)) //4
+// console.log(longest_repeating_character_replacement('AABABBA',1)) //4
+// console.log(longest_repeating_character_replacement('BAAA',0)) //3
+// console.log(longest_repeating_character_replacement('AABA',0)) //2
+// console.log(longest_repeating_character_replacement('EQQEJDOBDPDPFPEIAQLQGDNIRDDGEHJIORMJPKGPLCPDFMIGHJNIIRSDSBRNJNROBALNSHCRFBASTLRMENCCIBJLGAITBFCSMPRO',2)) //5
+
+
+function minimum_window_substring(s,t){
+    let sLen = s.length
+    let tLen = t.length
+    if(sLen < tLen) return ''
+    let res;
+    let currLen=0
+    let l=0
+    let r=0
+    while(currLen )
+
+    return res
+}
+// console.log(minimum_window_substring('ADOBECODEBANC','ABC')) // "BANC"
+// console.log(minimum_window_substring('a','a')) // 'a'
+// console.log(minimum_window_substring('a','aa')) // ''
 
 function sliding_window_maximum(nums,k){
     //brute force

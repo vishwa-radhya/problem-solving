@@ -307,17 +307,94 @@ function contains_duplicate_2(nums,k){
 
 // 706. design hashMap
 let myHashMap = function(){
-
+    this.map={}
 }
 myHashMap.prototype.put=function(key,value){
-
+    this.map[key]=value
 }
 myHashMap.prototype.get=function(key){
-
+    return this.map[key] ?? -1
 }
 myHashMap.prototype.remove=function(key){
-
+    delete this.map[key]
 }
+// with 27ms tc and 81.33% beat
+
+// got another 25ms with 90.56% beat by introducing a small change in get function 
+// return this.map.getOwnProperty(key) ? this.map.[key] : -1
+
+//the 21ms sol with self built hashMap
+// var MyHashMap = function() {
+//     this.size = 1000;
+//     this.buckets = new Array(this.size); 
+// };
+
+// /**
+//  * Private method to compute bucket index from key.
+//  * @param {number} key
+//  * @return {number}
+//  */
+// MyHashMap.prototype.getBucketIndex = function(key) {
+//     return key % this.size;
+// };
+
+// /** 
+//  * @param {number} key 
+//  * @param {number} value
+//  * @return {void}
+//  */
+// MyHashMap.prototype.put = function(key, value) {
+//     const bucketIndex = this.getBucketIndex(key);
+//     let bucket = this.buckets[bucketIndex]; 
+//     if (!bucket) {
+//         this.buckets[bucketIndex] = [];
+//         bucket = this.buckets[bucketIndex];
+//     }
+
+//     for (let pair of bucket){
+//         if (pair[0] === key){
+//             pair[1] = value;
+//             return
+//         }
+//     }
+
+//     bucket.push([key, value]);
+// };
+
+// /** 
+//  * @param {number} key
+//  * @return {number}
+//  */
+// MyHashMap.prototype.get = function(key) {
+//     const bucketIndex = this.getBucketIndex(key);
+//     const bucket = this.buckets[bucketIndex]; 
+
+//     if (!bucket) {
+//         return -1;
+//     }
+
+//     for (let pair of bucket) {
+//         if (pair[0] === key) return pair[1];
+//     }
+//     return -1;
+// };
+
+// /** 
+//  * @param {number} key
+//  * @return {void}
+//  */
+// MyHashMap.prototype.remove = function(key) {
+//     const bucketIndex = this.getBucketIndex(key);
+//     const bucket = this.buckets[bucketIndex]; 
+//     if (!bucket) return;
+
+//     for(let i = 0; i < bucket.length; i++){
+//         if (bucket[i][0] === key){
+//             bucket.splice(i,1)
+//         }
+//     }
+// };
+
 /**
  * MyHashMap() initializes the object with an empty map.
 void put(int key, int value) inserts a (key, value) pair into the HashMap. If the key already exists in the map, update the corresponding value.
