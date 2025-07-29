@@ -38,3 +38,17 @@ function find_lucky_stone_pairs(p,n,m,stones){
     // return (count * (count - 1)) / 2;
 }
 // console.log(find_lucky_stone_pairs(5,2,3,[6,9,12,15,18]))
+
+var compose = function(functions) {
+    return function(x) {
+        if(!functions.length) return x
+        // let val=functions[functions.length-1](x);
+        for(let i=functions.length-1;i>=0;i--){
+            x=functions[i](x)
+        }
+        return x
+    }
+};
+// const fn = compose([x => x + 1, x => x * x, x => 2 * x])
+// console.log(fn(4))
+// 70ms with 5.8% beat || next one 62ms with 12.07% beat

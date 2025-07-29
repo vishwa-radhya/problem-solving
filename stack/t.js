@@ -508,3 +508,40 @@ function minimum_remove_to_make_valid_parentheses(s){
 // console.log(minimum_remove_to_make_valid_parentheses('lee(t(c)o)de)'))
 // console.log(minimum_remove_to_make_valid_parentheses('a)b(c)d'))
 // console.log(minimum_remove_to_make_valid_parentheses('))(('))
+
+function remove_duplicate_elements(s){
+    let stack=[]
+
+}
+// console.log(remove_duplicate_elements('bcabc')) //abc
+// console.log(remove_duplicate_elements('cbacdcbc')) //acdb
+
+function longest_valid_parentheses(s){
+   let stack=[-1]
+    let maxLen=0
+    for(let i=0;i<s.length;i++){
+        if(s[i]=='(') {
+            stack.push(i)
+            console.log(stack)
+        }else{
+            stack.pop()
+            console.log(stack)
+            if(stack.length == 0){
+                stack.push(i)
+                console.log(stack)
+            }else{
+                console.log(maxLen,i-stack[stack.length-1])
+                maxLen = Math.max(maxLen,i-stack[stack.length-1])
+            }
+        }
+    }
+    return maxLen
+    //4ms with 44.74% beat
+}
+// console.log(longest_valid_parentheses('(()')) // 2
+// console.log(longest_valid_parentheses(')()())')) // 4
+// console.log(longest_valid_parentheses('')) // 0
+// console.log(longest_valid_parentheses('()')) // 2
+// console.log(longest_valid_parentheses(')(')) // 0
+// console.log(longest_valid_parentheses('()(()')) // 2
+// console.log(longest_valid_parentheses('()(())')) // 6
