@@ -200,13 +200,239 @@ function mergeTwoLists(list1,list2){
     temp.next = list1!=null ? list1 : list2
     return result.next
 }
-const list1 = new LinkedList();
-list1.append(1)
-list1.append(2)
-list1.append(4)
-const list2 = new LinkedList();
-list2.append(1)
-list2.append(3)
-list2.append(4)
+// const list1 = new LinkedList();
+// list1.append(1)
+// list1.append(2)
+// list1.append(4)
+// const list2 = new LinkedList();
+// list2.append(1)
+// list2.append(3)
+// list2.append(4)
 // console.log(list1,list2)
 // console.log(mergeTwoLists(convertToLeetCodeList(list1.head),convertToLeetCodeList(list2.head)))
+
+function reverse_linked_list(head){
+    // ex-> [1,2,3,4,5] -> [5,4,3,2,1]
+    // if(!head) return head
+    // let arr =[]
+    // let cur = head;
+    // while(cur){
+    //     arr.push(cur.val)
+    //     cur=cur.next
+    // }
+    // arr=arr.reverse()
+    // let res = new ListNode()
+    // let c = res
+    // for(let i=0;i<arr.length;i++){
+    //     c.next=new ListNode(arr[i])
+    //     c=c.next
+    // }
+    // return res.next
+    //2ms with 2.50% beat
+    //hitting with 3 pointer approach
+    let prev =null
+    let curr = head
+    while(curr){
+        let next = curr.next
+        // console.log("next:",next)
+        curr.next=prev
+        // console.log("curr:",curr)
+        prev=curr
+        // console.log("prev:",prev)
+        curr=next
+        // console.log("curr:",curr)
+        // console.log('-----------------')
+    }
+    return prev
+    //0ms with 100% upbeat
+}
+// const list1 = new LinkedList();
+// list1.append(1)
+// list1.append(2)
+// list1.append(3)
+// list1.append(4)
+// console.log(list1)
+// console.log(reverse_linked_list(convertToLeetCodeList(list1.head)))
+
+function linked_list_cycle(head){
+    // let set = new Set()
+    // let curr = head
+    // while(curr){
+    //     if(set.has(curr)){
+    //         return true
+    //     }
+    //     set.add(curr)
+    //     curr=curr.next
+    // }
+    // return false
+    // 47ms with 82.34% beat 
+    // using slow and fast pointer approach
+    let slow = head
+    let fast = head
+    while(fast && fast.next){
+        fast = fast.next.next
+        slow = slow.next
+        // console.log(fast,slow)
+        if(slow == fast) return true
+    }
+    return false
+    //48ms with 78.43% beat
+
+}
+// let list1 = new LinkedList();
+// list1.append(1)
+// list1.append(2)
+// list1.append(3)
+// list1.append(4)
+// list1.append(5)
+// console.log(linked_list_cycle(convertToLeetCodeList(list1.head)))
+
+function intersection_of_two_linked_lists(headA,headB){
+    // let headACount=0
+    // let headBCount=0
+    // let c1 = headA
+    // let c2 = headB
+    // while(c1){headACount++
+    //      c1=c1.next}
+    // while(c2){headBCount++
+    //      c2=c2.next}
+    // let biggerCountNode = headACount >= headBCount ? 'A' : 'B'
+    // c1 = headA
+    // c2 =headB
+    // let diff = Math.abs(headACount-headBCount)
+    // if(biggerCountNode == 'A'){
+    //     let i=0
+    //     while(i<diff && c1.next){
+    //         c1=c1.next
+    //         i++
+    //     }
+    // }else{
+    //     let i=0
+    //     while(i<diff && c2.next){
+    //         c2=c2.next
+    //         i++
+    //     }
+    // }
+    // while(c1 && c2){
+    //     // console.log(c1)
+    //     // console.log(c2)
+    //     if(c1==c2){
+    //         return c1
+    //     }
+    //     c1=c1.next
+    //     c2=c2.next
+    // }
+    // return null
+    //52ms tc with 81.96% beat
+    //the 35ms one is crazy as hell its the fastest
+    let pA = headA;
+    let pB = headB;
+    while (pA !== pB) {
+        // console.log(pA)
+        // console.log(pB)
+        pA = (pA === null) ? headB : pA.next;
+        pB = (pB === null) ? headA : pB.next;
+    }
+    return pA;
+}
+// intersectVal = 8, listA = [4,1,8,4,5], listB = [5,6,1,8,4,5], skipA = 2, skipB = 3
+// const list1 = new LinkedList();
+// list1.append(4)
+// list1.append(1)
+// list1.append(8)
+// list1.append(4)
+// list1.append(5)
+// const list2 = new LinkedList();
+// list2.append(5)
+// list2.append(6)
+// list2.append(1)
+// list2.append(8)
+// list2.append(4)
+// list2.append(5)
+// console.log(intersection_of_two_linked_lists(convertToLeetCodeList(list1.head),convertToLeetCodeList(list2.head)))
+
+function remove_nth_node_from_end_of_list(head,n){
+    let len =0
+    let c = head
+    while(c){
+        len++
+        c=c.next
+    }
+    let removeIndex = len-n
+    c=head
+    let prev =null
+    let i=0
+    while(i<removeIndex){
+        prev=c
+        c=c.next
+        i++
+    }
+    if(prev && c.next){
+        prev.next = c.next
+    }else if(prev && !c.next){
+        prev.next=null
+    }else if(!prev && c.next){
+        head=c.next
+    }else if(!prev && c.next==null){
+        return null
+    }
+    else if(!prev && !c){
+        return null
+    }
+    return head
+    //0ms with 100% upbeat
+}
+// [1,2,3,4,5], n = 2 -> [1,2,3,5]
+// [1], n = 1 -> []
+// [1,2], n = 1 -> [1]
+// [1,2], n = 2 -> [2]
+// const list1 = new LinkedList();
+// list1.append(1)
+// list1.append(2)
+// list1.append(3)
+// list1.append(4)
+// list1.append(5)
+// console.log(remove_nth_node_from_end_of_list(convertToLeetCodeList(list1.head),2))
+// console.log(remove_nth_node_from_end_of_list(convertToLeetCodeList(list1.head),1))
+
+function add_two_numbers(l1,l2){
+    let l1Arr=[]
+    let l2Arr=[]
+    let c1 =l1
+    let c2 =l2
+    while(c1){
+        l1Arr.push(c1.val)
+        c1=c1.next
+    }
+    while(c2){
+        l2Arr.push(c2.val)
+        c2=c2.next
+    }
+    let sum = Number(l1Arr.reverse().join(''))+Number(l2Arr.reverse().join(''))
+    if(sum==0){
+        let res = new ListNode()
+        return res
+    }
+    let res = new ListNode()
+    let c= res
+    while(sum>0){
+        c.next=new ListNode(sum%10)
+        c=c.next
+        sum=Math.floor(sum/10)
+    }
+    return res.next
+    //wrong answer at 1566/1569 due to large number addition
+    //should follow add from reverse then chain the value from front handling nodeval+nodeval >= 10
+    
+}
+// l1 = [2,4,3], l2 = [5,6,4] [7,0,8] 342 + 465 = 807
+const list1 = new LinkedList();
+// list1.append(2)
+// list1.append(4)
+// list1.append(3)
+list1.append(1)
+const list2 = new LinkedList();
+// list2.append(5)
+// list2.append(6)
+list2.append(0)
+console.log(add_two_numbers(convertToLeetCodeList(list1.head),convertToLeetCodeList(list2.head)))
