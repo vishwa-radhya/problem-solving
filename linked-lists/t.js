@@ -623,7 +623,7 @@ function rotate_list(head,k){
     return firstPart
     //0ms tc with 100% upbeat
 }
-let list1 = new LinkedList()
+// let list1 = new LinkedList()
 // list1.append(1)
 // list1.append(2)
 // list1.append(3)
@@ -631,62 +631,378 @@ let list1 = new LinkedList()
 // list1.append(5)
 // console.log(rotate_list(convertToLeetCodeList(list1.head),2))
 
-// function ListNode(val, next) {
-//     this.val = (val===undefined ? 0 : val)
-//     this.next = (next===undefined ? null : next)
-// }
+function ListNode(val, next) {
+    this.val = (val===undefined ? 0 : val)
+    this.next = (next===undefined ? null : next)
+}
 
-// var MyLinkedList = function() {
-    
-// };
-
-// /** 
-//  * @param {number} index
-//  * @return {number}
-//  */
-// MyLinkedList.prototype.get = function(index) {
-    
-// };
-
-// /** 
-//  * @param {number} val
-//  * @return {void}
-//  */
-// MyLinkedList.prototype.addAtHead = function(val) {
-    
-// };
-
-// /** 
-//  * @param {number} val
-//  * @return {void}
-//  */
-// MyLinkedList.prototype.addAtTail = function(val) {
-    
-// };
-
-// /** 
-//  * @param {number} index 
-//  * @param {number} val
-//  * @return {void}
-//  */
-// MyLinkedList.prototype.addAtIndex = function(index, val) {
-    
-// };
-
-// /** 
-//  * @param {number} index
-//  * @return {void}
-//  */
-// MyLinkedList.prototype.deleteAtIndex = function(index) {
-    
-// };
+var MyLinkedList = function() {
+    this.head = null
+    this.length=0
+};
 
 /** 
- * Your MyLinkedList object will be instantiated and called as such:
- * var obj = new MyLinkedList()
- * var param_1 = obj.get(index)
- * obj.addAtHead(val)
- * obj.addAtTail(val)
- * obj.addAtIndex(index,val)
- * obj.deleteAtIndex(index)
+ * @param {number} index
+ * @return {number}
  */
+MyLinkedList.prototype.get = function(index) {
+    if(this.length==0 || index<0 || index>=this.length) return -1
+    let i=0;
+    let curr = this.head
+    while(i<index){
+        curr=curr.next
+        i++
+    }
+    return curr.val
+};
+
+/** 
+ * @param {number} val
+ * @return {void}
+ */
+MyLinkedList.prototype.addAtHead = function(val) {
+    if(this.length==0){
+        this.head=new ListNode(val)
+        this.length++
+        return
+    }
+    let newNode = new ListNode(val)
+    newNode.next=this.head
+    this.head=newNode
+    this.length++
+};
+
+/** 
+ * @param {number} val
+ * @return {void}
+ */
+MyLinkedList.prototype.addAtTail = function(val) {
+    if(this.length==0){
+        this.addAtHead(val)
+        return
+    }
+    let curr = this.head
+    let newNode = new ListNode(val)
+    while(curr.next){
+        curr=curr.next
+    }
+    curr.next=newNode
+    this.length++
+};
+
+/** 
+ * @param {number} index 
+ * @param {number} val
+ * @return {void}
+ */
+MyLinkedList.prototype.addAtIndex = function(index, val) {
+    if(index > this.length || index<0) return
+    if(index == this.length){
+        this.addAtTail(val)
+        return
+    }   
+    if(index==0){
+        this.addAtHead(val)
+        return
+    }
+    let i=0
+    let prev=null
+    let curr = this.head
+    let newNode = new ListNode(val)
+    while(i<index && curr){
+        prev = curr
+        curr=curr.next
+        i++
+    }
+    prev.next = newNode
+    newNode.next = curr
+    this.length++
+};
+
+/** 
+ * @param {number} index
+ * @return {void}
+ */
+MyLinkedList.prototype.deleteAtIndex = function(index) {
+    if(index<0 || index>=this.length ) return
+    if(index==0 && this.length){
+        this.head = this.head.next
+        this.length--
+        return
+    }
+    let i=0
+    let prev=null
+    let curr =this.head
+    while(i<index && curr){
+        prev=curr
+        curr=curr.next
+        i++
+    }
+    prev.next=curr?.next
+    this.length--
+};
+// 31ms with 18.15% beat
+ 
+//   Your MyLinkedList object will be instantiated and called as such:
+//   var obj = new MyLinkedList()
+  //   var param_1 = obj.get(index)
+    // obj.addAtHead(1)
+    // obj.addAtHead(2)
+    // obj.addAtTail(3)
+    // obj.addAtIndex(0,1)
+    // obj.addAtIndex(1,2)
+    // obj.addAtIndex(2,3)
+    // obj.deleteAtIndex(0)
+//   console.log(obj.get(2))
+//   obj.addAtTail(val)
+//   obj.addAtIndex(index,val)
+//   obj.deleteAtIndex(index)
+ 
+function remove_duplicates_from_sorted_list_II(head){
+    // if(!head || !head.next) return head
+    // let set=new Set()
+    // let removeNums=[]
+    // let curr = head
+    // while(curr){
+    //     if(set.has(curr.val)){
+    //         removeNums.push(curr.val)
+    //     }else{
+    //         set.add(curr.val)
+    //     }
+    //     curr=curr.next
+    // }
+    // set = new Set(removeNums)
+    // //dummy head to handle edge cases like head itself to be removed
+    // let dummy = {next:head}
+    // let prev = dummy
+    // curr=head
+    // while(curr){
+    //     if(set.has(curr.val)){
+    //         prev.next=curr.next
+    //     }else{
+    //         prev=curr
+    //     }
+    //     curr=curr.next
+    // }
+    // return dummy.next
+    //4ms with 7.74% beat
+    // taking the above approach with more native usage
+    if (!head || !head.next) return head;
+    const dummy = new ListNode(0, head);
+    let prev = dummy;
+    let current = head;
+    while (current) {
+        let isDuplicate = false;
+        //skip to last if 2->2->2 then current goes to last 2 then we use prev.next to c.next
+        while (current.next && current.val === current.next.val) {
+            isDuplicate = true;
+            current = current.next;
+        }
+        if (isDuplicate) {
+            prev.next = current.next;
+        } else {
+            prev = prev.next;
+        }
+        current = current.next;
+    }
+    return dummy.next;
+    //0ms tc with 100% upbeat
+}
+// let list1 = new LinkedList()
+// list1.append(1)
+// list1.append(2)
+// list1.append(3)
+// list1.append(3)
+// list1.append(4)
+// list1.append(4)
+// list1.append(5)
+// console.log(remove_duplicates_from_sorted_list_II(convertToLeetCodeList(list1.head)))
+// head = [1,2,3,3,4,4,5]-> [1,2,5]
+
+function swap_nodes_in_pairs(head){
+    if(!head || !head.next) return head
+    let arr=[]
+    let c = head
+    while(c){
+        arr.push(c.val)
+        c=c.next
+    }
+    let last = arr.length%2==0 ? arr.length-1 : arr.length-2
+    let i=0,j=1
+    while(i<arr.length && j<arr.length){
+        [arr[i],arr[j]] = [arr[j],arr[i]]
+        i+=2
+        j+=2
+    }
+    c=head
+    i=0
+    while(c && i<arr.length){
+        c.val=arr[i]
+        i++
+        c=c.next
+    }
+    return head
+    // 0ms tc with 100% upbeat
+    // another 0ms with in place list modification
+    // let pre=head;
+    // let cur=head;
+    // if(cur && cur.next){
+    //     pre.next=cur.next;
+    //     let n1=cur;
+    //     let n2=cur.next;
+    //     n1.next=n2.next
+    //     n2.next=cur;        
+    //     cur=n1.next;        
+    //     head=n2;
+    // }
+    // while(cur && cur.next){
+    //     pre.next=cur.next;
+    //     let n1=cur;
+    //     let n2=cur.next;
+    //     n1.next=n2.next;
+    //     n2.next=cur;
+    //     pre=cur;
+    //     cur=n1.next;
+    // }
+    // return head
+}
+// const list1 = new LinkedList()
+// list1.append(1)
+// list1.append(2)
+// list1.append(3)
+// list1.append(4)
+// list1.append(5)
+// console.log(swap_nodes_in_pairs(convertToLeetCodeList(list1.head)))
+// [1,2,3,4] [2,1,4,3]
+//[] [] // [1] [1] // [1,2,3] [2,1,3]
+
+function middle_of_linked_list(head){
+    if(!head || !head.next || !head.next.next) return head
+    let slow = head
+    let fast = head
+    while(fast?.next){
+        fast = fast && fast.next ? fast.next : null
+        fast = fast && fast.next ? fast.next : null
+        slow=slow.next
+    }
+    return slow
+}
+// 0ms with 100% upbeat
+// [1,2,3,4,5] => [3,4,5]
+// [1,2,3,4,5,6] => [4,5,6]
+// constraints nodes -> [1,100] 
+// console.log(middle_of_linked_list(convertToLeetCodeList(list1.head)))
+
+function palindrome_linked_list(head){
+    // let arr=[]
+    // let c = head
+    // while(c){
+    //     arr.push(c.val)
+    //     c=c.next
+    // }
+    // let i=0,j = arr.length-1
+    // while(i<j){
+    //     if(arr[i]!=arr[j]) return false
+    //     i++
+    //     j--
+    // }
+    // return true
+    // 6ms with 54.40% beat
+    // alternate feasible appraoch find middle reverse the middle and check first half and middle
+    if(!head || !head.next) return true
+    let slow = head
+    let fast = head
+    while(fast && fast.next){
+        slow=slow.next
+        fast = fast.next.next
+    }
+    let prev = null
+    while(slow){
+        let next = slow.next
+        slow.next=prev
+        prev=slow
+        slow=next
+    }
+    fast = head
+    while(prev && fast){
+        if(prev.val !== fast.val) return false
+        prev=prev.next
+        fast=fast.next
+    }
+    return true
+    //3ms with 93.35% beat
+}
+// [1,2,2,1] => true
+// [1,2] => false
+
+function delete_the_middle_node_of_linked_list(head){
+    if(!head) return head
+    if(!head.next) return head=head.next
+    let prev=null
+    let slow=head
+    let fast = head
+    while(fast && fast.next){
+        prev=slow
+        slow=slow.next
+        fast=fast.next.next
+    }
+    prev.next=slow.next
+    return head
+    // 2ms with 99.73% beat
+}
+
+function odd_even_linked_list(head){
+    if(!head || !head.next) return head
+    let odd = head
+    let even = head.next
+    let evenHead = even
+    while(even && even.next){
+        odd.next=even.next
+        odd=odd.next
+        even.next=odd.next
+        even=even.next
+    }
+    odd.next=evenHead
+    return head
+    //0ms with 100% upbeat
+}
+
+function partition_list(head,x){
+    if(!head || !head.next) return head
+    let arr=[]
+    let c=head
+    while(c && c.val!=x) c=c.next
+    c= c ? c.next : null
+    while(c){
+        if(c.val<x) arr.push(c.val)
+        c=c.next
+    }
+    let list = new ListNode()
+    c=list
+    while(arr.length){
+        c.next = new ListNode(arr.shift())
+        c=c.next
+    }
+    list=list.next
+    let prev=null
+    c=head
+    while(c){
+        prev = c
+        c=c.next
+        if(c.val>=x){
+            prev.next=list
+            list.next=c
+            return head
+        }
+    }
+}
+// [1,4,3,2,5,2] , 3 -> [1,2,2,4,3,5]
+// [2,1] , 2 -> [1,2]
+let list1 = new LinkedList();
+list1.append(1)
+list1.append(4)
+list1.append(3)
+list1.append(2)
+list1.append(5)
+list1.append(2)
+console.log(partition_list(convertToLeetCodeList(list1.head),3))
