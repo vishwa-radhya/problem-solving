@@ -129,27 +129,79 @@ function three_sum(nums){
 // console.log(three_sum([0,0,0]))
 
 function trapping_rain_water(height){
-    let trapCount=0
-    let len = height.length;
-    let j;
-    for(let i=0;i<len-1;i++){
-        if(height[0]==0) {
+    if(!height.length) return 0;
+    let n = height.length;
+    let i=0;
+    let rainCount=0;
+    while(i<n-1){
+        if(height[i]==0){
+            i++;
             continue;
         }
-        j=i+1;
-        while(j<len){
-            if(height[j]<height[i]){
-                j++
-            }else{
-                if(j-i>1){
-                    break
-                }
+        let j=i+1;
+        let maxRight =j;
+        while(j<n){
+            if(height[j]>=height[i]){
+                maxRight=j;
+                break;
             }
-            j++
+            if(height[j]>height[maxRight]){
+                maxRight=j; // tallest for far
+            }
+            j++;
         }
-        console.log(i,j)
-        break
+        let minWall = Math.min(height[i],height[maxRight]);
+        for(let k=i+1;k<maxRight;k++){
+            rainCount+=Math.max(0,minWall-height[k]);
+        }
+        i=maxRight
     }
+    return rainCount
+    // 272ms with 5.04% beat
+    // a 12ms approach
+    // if (!height.length) return 0;
+    // let n = height.length;
+    // let leftMax = Array(n).fill(0);
+    // let rightMax = Array(n).fill(0);
+
+    // leftMax[0] = height[0];
+    // for (let i = 1; i < n; i++) {
+    //     leftMax[i] = Math.max(leftMax[i - 1], height[i]);
+    // }
+
+    // rightMax[n - 1] = height[n - 1];
+    // for (let i = n - 2; i >= 0; i--) {
+    //     rightMax[i] = Math.max(rightMax[i + 1], height[i]);
+    // }
+
+    // let rainCount = 0;
+    // for (let i = 0; i < n; i++) {
+    //     rainCount += Math.min(leftMax[i], rightMax[i]) - height[i];
+    // }
+    // return rainCount;
+    // 1ms approach
+    // let left = 0, right = height.length - 1;
+    // let leftMax = 0, rightMax = 0, rainCount = 0;
+    // while (left < right) {
+    //     if (height[left] < height[right]) {
+    //         if (height[left] >= leftMax) {
+    //             leftMax = height[left];
+    //         } else {
+    //             rainCount += leftMax - height[left];
+    //         }
+    //         left++;
+    //     } else {
+    //         if (height[right] >= rightMax) {
+    //             rightMax = height[right];
+    //         } else {
+    //             rainCount += rightMax - height[right];
+    //         }
+    //         right--;
+    //     }
+    // }
+    // return rainCount;
 }
 // console.log(trapping_rain_water([0,1,0,2,1,0,1,3,2,1,2,1])) // 6
 // console.log(trapping_rain_water([4,2,0,3,2,5])) // 9
+// console.log(trapping_rain_water([4,2,3])) // 1 not 0
+// console.log(trapping_rain_water([4,2,0,3,2,5]))

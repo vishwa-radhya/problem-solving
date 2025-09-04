@@ -967,6 +967,64 @@ function odd_even_linked_list(head){
     //0ms with 100% upbeat
 }
 
+function reorder_list(head){
+    let slow=head,fast=head
+    while(fast && fast.next){
+        slow=slow.next
+        fast=fast.next.next
+    }
+    let prev=null,curr = slow.next
+    slow.next=null
+    while(curr){
+        let next = curr.next
+        curr.next=prev
+        prev=curr
+        curr=next
+    }
+    let secondPart=prev
+    let first=head,second = secondPart
+    while(second){
+        let t1 = first.next
+        let t2 = second.next
+        // console.log("t1:",t1,"t2:",t2)
+        first.next=second
+        second.next=t1
+        // console.log("first:",first,"second:",second)
+        first=t1
+        second=t2
+        // console.log("first:",first,"second:",second)
+    }
+    //3ms with 41.89% beat (max similar approaches)
+}
+//[1,2,3,4,5] -> [1,5,2,4,3]
+function find_the_duplicate_number(nums){
+    // nums=nums.sort((a,b)=>a-b)
+    // for(let i=0;i<nums.length-1;i++){
+    //     if(nums[i]==nums[i+1]) return nums[i]
+    // }
+    //127ms with 5.82% beat
+    // for(let i=0;i<nums.length;i++){
+    //     let e = Math.abs(nums[i])
+    //     if(nums[e]<0) return e
+    //     nums[e]=-nums[e]
+    // }
+    //2ms with 98.52% beat
+    //using linked list approach
+    let slow = nums[0];
+    let fast = nums[0];
+    do{
+        slow = nums[slow];
+        fast = nums[nums[fast]]
+    }while(slow !== fast)
+    slow = nums[0]
+    while(slow !== fast){
+        slow = nums[slow]
+        fast = nums[fast]   
+    }
+    return slow 
+}
+//[1,3,4,2,2]
+
 function partition_list(head,x){
     if(!head || !head.next) return head
     let arr=[]
@@ -998,11 +1056,40 @@ function partition_list(head,x){
 }
 // [1,4,3,2,5,2] , 3 -> [1,2,2,4,3,5]
 // [2,1] , 2 -> [1,2]
-let list1 = new LinkedList();
+
+// let list1 = new LinkedList();
+// list1.append(1)
+// list1.append(4)
+// list1.append(3)
+// list1.append(2)
+// list1.append(5)
+// list1.append(2)
+// console.log(partition_list(convertToLeetCodeList(list1.head),3))
+
+function reverse_linked_list_II(head,left,right){
+    let count=1
+    let leftPart=null
+    let rightPart=null
+    let curr = head
+    while(count<=left && curr){
+        leftPart=curr
+        leftPart.next=null
+        curr=curr.next
+        count++
+    }
+    count=1
+    curr=head
+    while(curr && count<=right){
+        rightPart=curr
+        curr=curr.next
+        count++
+    }
+    return {leftPart,rightPart}
+}
+let list1 = new LinkedList()
 list1.append(1)
-list1.append(4)
+list1.append(2)
 list1.append(3)
-list1.append(2)
+list1.append(4)
 list1.append(5)
-list1.append(2)
-console.log(partition_list(convertToLeetCodeList(list1.head),3))
+console.log(reverse_linked_list_II(convertToLeetCodeList(list1.head),2,4))
