@@ -1,3 +1,41 @@
+'''
+1. Climbing StairsDescription: Given $n$ stairs, you can climb either 1 or 2 steps at a time. The goal is to find the total number of distinct ways to reach the top. This is a classic Dynamic Programming problem often solved using the Fibonacci sequence concept.Test Case 1: Input: $n = 2$Answer: 2 (Ways: 1+1, 2)Test Case 2: Input: $n = 4$Answer: 5 (Ways: 1+1+1+1, 1+1+2, 1+2+1, 2+1+1, 2+2)
+
+2. Check if a given year is leap yearDescription: A year is a leap year if it is divisible by 4, except for years divisible by 100 but not by 400.Test Case 1: Input: Year = 2000Answer: True (Divisible by 400)Test Case 2: Input: Year = 1900Answer: False (Divisible by 100 but not by 400)
+
+3. Prime NumbersDescription: A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself. The task is usually to check if a given number is prime, or to generate primes up to a certain limit (e.g., using the Sieve of Eratosthenes).Test Case 1: Input: $N = 17$Answer: TrueTest Case 2: Input: $N = 15$Answer: False ($15 = 3 \times 5$)
+
+4. Number is Positive, Negative, Odd, Even, ZeroDescription: Determine and report the properties of a given integer. This involves using conditional logic (if/elif/else) and the modulo operator (%) to check for even/odd status.Test Case 1: Input: $N = -10$Answer: Negative and EvenTest Case 2: Input: $N = 7$Answer: Positive and Odd
+
+5. All divisors of a natural numberDescription: Find all positive integers that divide the given natural number $N$ exactly, without leaving a remainder. For efficiency, you only need to check up to the square root of $N$.Test Case 1: Input: $N = 12$Answer: $[1, 2, 3, 4, 6, 12]$Test Case 2: Input: $N = 25$Answer: $[1, 5, 25]$
+
+6. Convert a Number to HexadecimalDescription: Convert a given integer from base-10 to its base-16 (hexadecimal) representation. The output should use lowercase letters ('a' through 'f'). In Python, the built-in hex() function can be used, but the challenge is usually to implement the conversion logic (using repeated division by 16).Test Case 1: Input: $N = 255$Answer: "ff"Test Case 2: Input: $N = 26$Answer: "1a"
+
+7. Valid Perfect SquareDescription: Determine if a given positive integer $N$ is a perfect square, meaning it is the square of some integer. This can be solved by checking the integer square root, or efficiently using Binary Search or the Newton's method.Test Case 1: Input: $N = 16$Answer: True ($4^2 = 16$)Test Case 2: Input: $N = 14$Answer: False
+
+8. Program to add two fractionsDescription: Given two fractions, $\frac{a}{b}$ and $\frac{c}{d}$, add them and return the result as a fraction $\frac{p}{q}$ in its simplest form (reduced to lowest terms). The addition formula is $\frac{a \times d + c \times b}{b \times d}$. Simplification requires finding the Greatest Common Divisor (GCD) of the numerator and the denominator.Test Case 1: Input: $\frac{1}{2}$ and $\frac{1}{4}$Answer: $\frac{3}{4}$ (Calculation: $\frac{1 \times 4 + 1 \times 2}{2 \times 4} = \frac{6}{8}$, simplified to $\frac{3}{4}$)Test Case 2: Input: $\frac{1}{3}$ and $\frac{2}{3}$Answer: $\frac{1}{1}$ (Calculation: $\frac{1 \times 3 + 2 \times 3}{3 \times 3} = \frac{9}{9}$, simplified to $\frac{1}{1}$)
+
+9. Fibonacci numbersDescription: The Fibonacci sequence is defined by the rule that the next number is the sum of the two preceding ones, starting from 0 and 1. The task is to find the $n^{th}$ number in the sequence. $F_n = F_{n-1} + F_{n-2}$, with $F_0=0$ and $F_1=1$.Test Case 1: Input: $n = 6$Answer: 8 (Sequence: 0, 1, 1, 2, 3, 5, 8...)Test Case 2: Input: $n = 0$Answer: 0
+
+10. Add DigitsDescription: Given a non-negative integer, repeatedly add all its digits until the result has only one digit. This can be solved with a loop or by using the mathematical property known as the Digital Root ($N \pmod 9$).Test Case 1: Input: $N = 38$Answer: 2 (Process: $3 + 8 = 11$; $1 + 1 = 2$)Test Case 2: Input: $N = 9$Answer: 9
+
+11. Replace all '0' with '5' in an input IntegerDescription: Given an integer $N$, you need to replace every occurrence of the digit '0' within $N$ with the digit '5'. This task typically involves converting the number to a string to perform character replacement, or using modulo and division to examine the digits one by one.Test Case 1: Input: $N = 10240$Answer: $15245$Test Case 2: Input: $N = 55$Answer: $55$ (No '0's to replace)
+
+12. Perfect NumberDescription: A Perfect Number is a positive integer that is equal to the sum of its proper positive divisors (divisors excluding the number itself). The task is to check if a given number $N$ is perfect.Test Case 1: Input: $N = 6$Answer: True (Proper divisors are 1, 2, 3. Sum: $1 + 2 + 3 = 6$)Test Case 2: Input: $N = 28$Answer: True (Proper divisors are 1, 2, 4, 7, 14. Sum: $1 + 2 + 4 + 7 + 14 = 28$)
+
+13. Armstrong NumbersDescription: An Armstrong Number (or Narcissistic Number) is an $n$-digit number that is equal to the sum of the $n^{th}$ powers of its digits. For a 3-digit number $abc$, it is Armstrong if $a^3 + b^3 + c^3 = abc$. The task is to check if a given number $N$ is an Armstrong number.Test Case 1: Input: $N = 153$Answer: True ($1^3 + 5^3 + 3^3 = 1 + 125 + 27 = 153$)Test Case 2: Input: $N = 370$Answer: True ($3^3 + 7^3 + 0^3 = 27 + 343 + 0 = 370$)
+
+14. Sum of first $n$ natural numbersDescription: Calculate the sum of all positive integers from 1 up to a given number $n$. This can be done with a simple loop, or efficiently using the arithmetic progression formula: $S = \frac{n(n+1)}{2}$.Test Case 1: Input: $n = 5$Answer: 15 (Sum: $1+2+3+4+5=15$)Test Case 2: Input: $n = 10$Answer: 55 (Formula: $\frac{10 \times 11}{2} = 55$)
+
+15. Permutations to arrange $N$ persons around a circular tableDescription: Find the number of distinct ways to arrange $N$ unique objects in a circle. In circular arrangements, rotations of the same arrangement are considered identical. The number of circular permutations for $N$ objects is $(N-1)!$.Test Case 1: Input: $N = 3$Answer: 2 (Formula: $(3-1)! = 2! = 2$)Test Case 2: Input: $N = 5$Answer: 24 (Formula: $(5-1)! = 4! = 24$)
+
+16. Roots of Quadratic equationDescription: Find the roots (solutions) for a general quadratic equation $ax^2 + bx + c = 0$. This requires using the Quadratic Formula: $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$. The nature of the roots depends on the discriminant ($\Delta = b^2 - 4ac$).Test Case 1: Input: $a=1, b=-5, c=6$ ($x^2 - 5x + 6 = 0$)Answer: $x_1=3, x_2=2$ ($\Delta = 1$, Real and Distinct roots)Test Case 2: Input: $a=1, b=4, c=4$ ($x^2 + 4x + 4 = 0$)Answer: $x_1=-2, x_2=-2$ ($\Delta = 0$, Real and Equal roots)
+
+17. Maximum Product of Three NumbersDescription: Given an array of integers, find the maximum product that can be obtained by multiplying any three numbers in the array. This often involves sorting the array and checking two scenarios: the product of the three largest numbers, OR the product of the two smallest (most negative) numbers and the single largest number.Test Case 1: Input: nums = [1, 2, 3, 4]Answer: 24 (Product of 2, 3, 4)Test Case 2: Input: nums = [-10, -5, 1, 2, 3]Answer: 150 (Product of $-10 \times -5 \times 3$)
+
+18. Happy NumberDescription: A Happy Number is a number defined by the following process: starting with any positive integer, replace the number by the sum of the squares of its digits. Repeat the process until the number equals 1 (where it will stay), or it enters a repeating cycle that does not include 1. The task is to check if a given number is happy.Test Case 1: Input: $N = 19$Answer: True (Process: $1^2+9^2 = 82 \to 8^2+2^2 = 68 \to 6^2+8^2 = 100 \to 1^2+0^2+0^2 = 1$)Test Case 2: Input: $N = 4$Answer: False (The sequence enters the $4 \to 16 \to 37 \to 58 \to 89 \to 145 \to 42 \to 20 \to 4$ cycle)
+'''
+
 import math
 import functools
 
