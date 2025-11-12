@@ -167,9 +167,41 @@ def convert_chars_to_opposite_case(s):
 # print(convert_chars_to_opposite_case('PyThOn'))
 
 # 12
-
+def count_binary_substrings(s):
+    groups=[]
+    count=1
+    for i in range(1,len(s)):
+        if s[i]==s[i-1]:
+            count+=1
+        else:
+            groups.append(count)
+            count=1
+    groups.append(count)
+    print(groups)
+    result=0
+    for i in range(1,len(groups)):
+        result+=min(groups[i-1],groups[i])
+    return result
+# print(count_binary_substrings('00110011'))
+# print(count_binary_substrings('10101'))
 # 13
-
+def least_common_subsequence(S1,S2):
+    n, m = len(S1), len(S2)
+    dp = [[0] * (m + 1) for _ in range(n + 1)]
+    # print(dp)
+    for i in range(1, n + 1):
+        for j in range(1, m + 1):
+            if S1[i - 1] == S2[j - 1]:
+                # print('at if')
+                dp[i][j] = 1 + dp[i - 1][j - 1]
+                # print(dp)
+            else:
+                # print('at else')
+                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
+                # print(dp)
+    return dp[n][m]
+# print(least_common_subsequence('AGGTAB','GXTXAYB'))
+# print(least_common_subsequence('abcde','ace'))
 # 14
 
 # 15
